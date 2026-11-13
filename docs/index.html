@@ -9,15 +9,18 @@
 <meta property="og:description" content="Password strength and breach checks. Only 5 characters of a hash ever leave your device.">
 <meta property="og:image" content="https://noyaadivi.github.io/LeakLens/images/social-preview-en.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#E8E4FF">
 <link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--peach:#FFE6DE;--lav:#E8E4FF;--mint:#D9F3E7;--rose:#FBD5E0;--sun:#FFF1C9;--coral:#E36E57;--purple:#6F60F0;--deep:#5548C8;--ink:#2C2668;--muted:#6B5D7A;--card:rgba(255,255,255,.82);--line:rgba(179,169,250,.55);--fs:1}
 *{box-sizing:border-box}
+h1,h2,h3,.brand,.label,.stat b,.eyebrow,.btn,.pillbtn,.step b,.feat b,summary{font-family:Fredoka,Rubik,"Segoe UI",sans-serif}
 html{scroll-behavior:smooth;font-size:calc(16px * var(--fs))}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Rubik,Heebo,Helvetica,Arial,sans-serif;color:var(--ink);background:linear-gradient(160deg,#FFF3EF 0%,#F3F0FF 45%,#ECF9F3 100%);background-attachment:fixed;overflow-x:hidden;line-height:1.55}
+body{margin:0;font-family:Rubik,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:linear-gradient(160deg,#FFF3EF 0%,#F3F0FF 45%,#ECF9F3 100%);background-attachment:fixed;overflow-x:hidden;line-height:1.55}
 a{color:var(--deep)}
 .skip{position:absolute;inset-inline-start:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;z-index:100;text-decoration:none;font-weight:800}
 .skip:focus{top:12px}
