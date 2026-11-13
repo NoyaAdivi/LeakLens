@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LeakLens Playground</title>
+<meta name="description" content="Check password strength and data breaches privately, right in your browser.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.pwnedpasswords.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="favicon.png">
+<style>
+:root{--peach:#FFE6DE;--lav:#E8E4FF;--mint:#D9F3E7;--coral:#E36E57;--purple:#6F60F0;--ink:#2C2668;--muted:#7A6B88;--card:rgba(255,255,255,.78)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Rubik,Helvetica,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--peach),var(--lav) 55%,var(--mint));overflow-x:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(8px);opacity:.5;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.b1{width:360px;height:360px;background:#FFB4A2;left:-120px;bottom:-120px}.b2{width:420px;height:420px;background:#CFC8FF;right:-140px;top:-160px;animation-duration:17s}.b3{width:300px;height:300px;background:#A9E3CD;right:10%;bottom:-140px;animation-duration:20s}
+@keyframes drift{to{transform:translate(50px,-30px) scale(1.12)}}
+main{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+header{display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
+.brand img{width:64px;height:64px;border-radius:18px;box-shadow:0 8px 24px rgba(111,96,240,.25);animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+h1{margin:0;font-size:40px;font-weight:900;background:linear-gradient(90deg,var(--coral),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{margin:2px 0 0;color:var(--muted)}
+.lang{border:2px solid #B3A9FA;background:linear-gradient(90deg,var(--peach),var(--lav),var(--mint));color:#5548C8;font-weight:800;border-radius:999px;padding:10px 20px;font-size:16px;cursor:pointer;transition:transform .2s}
+.lang:hover{transform:translateY(-2px) scale(1.03)}
+.card{background:var(--card);backdrop-filter:blur(10px);border:1.5px solid rgba(179,169,250,.6);border-radius:28px;padding:24px;margin-top:22px;box-shadow:0 10px 40px rgba(44,38,104,.08);animation:rise .7s ease-out both}
+.card:nth-of-type(2){animation-delay:.1s}.card:nth-of-type(3){animation-delay:.2s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+h2{margin:0 0 14px;font-size:22px}
+.field{position:relative}
+input[type=password],input[type=text]{width:100%;font-size:20px;padding:16px 56px 16px 18px;border-radius:18px;border:2px solid #B3A9FA;background:#fff;color:var(--ink);outline:none;transition:box-shadow .2s,border-color .2s;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+[dir=rtl] input{padding:16px 18px 16px 56px}
+input:focus{border-color:var(--purple);box-shadow:0 0 0 5px rgba(111,96,240,.15)}
+.eye{position:absolute;top:50%;transform:translateY(-50%);inset-inline-end:12px;border:0;background:var(--lav);border-radius:12px;width:38px;height:38px;cursor:pointer;font-size:18px}
+.meter{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0 6px}
+.meter span{height:12px;border-radius:8px;background:rgba(44,38,104,.08);transition:background .35s,transform .35s}
+.meter span.on{transform:scaleY(1.25)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.label{font-weight:900;font-size:20px}
+.muted{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{padding:7px 12px;border-radius:999px;font-size:14px;font-weight:700;background:#fff;border:1.5px solid #E8E4FF;transition:all .25s}
+.chip.ok{background:var(--mint);border-color:#7FD3B0;color:#1F7350}
+.chip.bad{background:#FBD5E0;border-color:#F5B8C8;color:#A03A5C}
+ul.tips{margin:8px 0 0;padding-inline-start:20px;color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:32px}}
+.btn{border:0;border-radius:16px;padding:13px 20px;font-size:16px;font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(90deg,var(--coral),var(--purple));box-shadow:0 8px 20px rgba(111,96,240,.25);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(111,96,240,.32)}
+.btn.soft{background:#fff;color:#5548C8;border:2px solid #B3A9FA;box-shadow:none}
+.result{margin-top:14px;padding:16px;border-radius:18px;font-weight:700;display:none;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.result.bad{display:block;background:#FBD5E0;color:#5C1F33}.result.good{display:block;background:var(--mint);color:#1F4D38}.result.info{display:block;background:#FFF1C9;color:#5C4410}
+.hash{font-family:ui-monospace,Menlo,monospace;font-size:15px;word-break:break-all;background:#fff;border-radius:14px;padding:12px;border:1.5px dashed #B3A9FA;margin-top:10px}
+.hash b{color:var(--coral);background:var(--peach);border-radius:6px;padding:0 3px}
+.out{display:flex;gap:8px;margin-top:12px}
+.out input{font-size:17px;padding:14px}
+#gen,#pp{direction:ltr;text-align:left}
+label.opt{display:inline-flex;align-items:center;gap:6px;margin:6px 12px 6px 0;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--purple)}
+footer{margin-top:34px;text-align:center;color:var(--muted)}
+footer a{color:#5548C8;font-weight:800;text-decoration:none;margin:0 8px}
+.spark{position:fixed;font-size:22px;animation:tw 3s ease-in-out infinite;z-index:-1}
+@keyframes tw{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<span class="spark" style="top:12%;left:6%;color:#FFB4A2">✦</span><span class="spark" style="top:70%;right:5%;color:#B3A9FA;animation-delay:-1s">✦</span><span class="spark" style="top:40%;left:3%;color:#A9E3CD;animation-delay:-2s">✦</span>
+<main>
+<header>
+  <a class="brand" href="https://github.com/NoyaAdivi/LeakLens"><img src="readme/logo.png" alt="LeakLens logo"><div><h1>LeakLens</h1><p class="tag" data-i="tag"></p></div></a>
+  <button class="lang" id="lang">🌐 עברית</button>
+</header>
+
+<section class="card">
+  <h2 data-i="checkTitle"></h2>
+  <div class="field"><input id="pw" type="password" autocomplete="off" spellcheck="false" data-ph="ph"><button class="eye" id="eye" aria-label="show">👁️</button></div>
+  <div class="meter" id="meter"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="row"><span class="label" id="label">&nbsp;</span><span class="muted" id="crack"></span></div>
+  <div class="chips" id="chips"></div>
+  <ul class="tips" id="tips"></ul>
+  <div class="row" style="margin-top:16px"><button class="btn" id="pwnBtn" data-i="pwnBtn"></button><span class="muted" data-i="privacyNote"></span></div>
+  <div class="hash" id="hash" hidden></div>
+  <div class="result" id="pwnRes"></div>
+</section>
+
+<div class="grid">
+<section class="card">
+  <h2 data-i="genTitle"></h2>
+  <div class="row"><span data-i="length"></span><b id="lenVal">20</b></div>
+  <input type="range" id="len" min="8" max="64" value="20">
+  <div><label class="opt"><input type="checkbox" id="oU" checked>A-Z</label><label class="opt"><input type="checkbox" id="oL" checked>a-z</label><label class="opt"><input type="checkbox" id="oD" checked>0-9</label><label class="opt"><input type="checkbox" id="oS" checked>!@#</label></div>
+  <div class="out"><input id="gen" type="text" readonly><button class="btn soft" data-copy="gen" data-i="copy"></button></div>
+  <div style="margin-top:12px"><button class="btn" id="genBtn" data-i="genBtn"></button></div>
+</section>
+<section class="card">
+  <h2 data-i="ppTitle"></h2>
+  <div class="row"><span data-i="words"></span><b id="wVal">5</b></div>
+  <input type="range" id="words" min="3" max="10" value="5">
+  <p class="muted" data-i="ppNote"></p>
+  <div class="out"><input id="pp" type="text" readonly><button class="btn soft" data-copy="pp" data-i="copy"></button></div>
+  <div style="margin-top:12px"><button class="btn" id="ppBtn" data-i="ppBtn"></button></div>
+</section>
+</div>
+
+<footer>
+  <p data-i="foot"></p>
+  <a href="https://github.com/NoyaAdivi/LeakLens">GitHub</a>·<a href="https://github.com/NoyaAdivi/LeakLens#-api-at-a-glance" data-i="apiLink"></a>·<a href="https://haveibeenpwned.com/Passwords">Have I Been Pwned</a>·<a href="https://www.linkedin.com/in/noya-adivi/">LinkedIn</a>
+</footer>
+</main>
+<script>
+const WORDS=["acorn", "amber", "anchor", "apple", "arrow", "atlas", "autumn", "bagel", "bamboo", "banjo", "basil", "beacon", "berry", "bison", "blossom", "breeze", "bright", "brook", "bubble", "cactus", "camel", "candle", "canyon", "carrot", "castle", "cedar", "cherry", "cloud", "clover", "cobalt", "comet", "copper", "coral", "cosmic", "cotton", "crane", "crystal", "daisy", "dawn", "delta", "desert", "dolphin", "dragon", "dream", "eagle", "echo", "ember", "falcon", "fern", "fiddle", "flame", "forest", "fossil", "fox", "galaxy", "garden", "gecko", "ginger", "glacier", "globe", "golden", "grape", "gravity", "harbor", "harvest", "hazel", "heron", "honey", "horizon", "husky", "island", "ivory", "jade", "jasmine", "jelly", "jungle", "kayak", "kettle", "kiwi", "koala", "lagoon", "lantern", "lava", "lemon", "lily", "lime", "lotus", "lucky", "lunar", "magnet", "mango", "maple", "marble", "meadow", "melody", "meteor", "mint", "mirror", "misty", "moon", "mossy", "mountain", "muffin", "nectar", "needle", "noble", "nova", "oasis", "ocean", "olive", "onyx", "opal", "orbit", "orchid", "otter", "panda", "paper", "parrot", "peach", "pebble", "pepper", "piano", "pickle", "pilot", "pine", "pixel", "planet", "plum", "polar", "poppy", "prism", "puzzle", "quartz", "quiet", "rabbit", "radar", "rain", "raven", "reef", "river", "robin", "rocket", "rose", "ruby", "saffron", "sage", "salmon", "sapphire", "satin", "scarlet", "shadow", "shell", "silver", "sky", "snow", "solar", "spark", "spice", "spiral", "sprout", "star", "stone", "storm", "sugar", "summit", "sunny", "swan", "tango", "thunder", "tiger", "timber", "toast", "topaz", "tulip", "tundra", "turtle", "velvet", "violet", "voyage", "waffle", "walnut", "wander", "willow", "winter", "wizard", "wolf", "yonder", "zebra", "zenith", "zephyr"], COMMON=new Set(["123456", "password", "123456789", "12345678", "12345", "qwerty", "qwerty123", "1234567", "111111", "123123", "abc123", "1234567890", "password1", "1234", "iloveyou", "000000", "654321", "1q2w3e4r", "1q2w3e", "qwertyuiop", "123321", "666666", "121212", "monkey", "dragon", "letmein", "football", "baseball", "sunshine", "princess", "welcome", "admin", "admin123", "master", "shadow", "superman", "michael", "jessica", "charlie", "ashley", "bailey", "passw0rd", "p@ssw0rd", "p@ssword", "trustno1", "starwars", "whatever", "freedom", "hello", "hello123", "login", "access", "flower", "hottie", "loveme", "zaq12wsx", "qazwsx", "asdfgh", "asdfghjkl", "zxcvbnm", "pokemon", "batman", "computer", "internet", "secret", "summer", "winter", "cookie", "chocolate", "cheese", "soccer", "hockey", "killer", "ninja", "mustang", "pepper", "ginger", "jordan", "jordan23", "liverpool", "chelsea", "arsenal", "barcelona", "samsung", "google", "facebook", "instagram", "youtube", "apple", "iphone", "linkedin", "twitter", "matrix", "corvette", "ferrari", "yankees", "rangers", "lakers", "taylor", "thomas", "daniel", "andrew", "joshua", "hunter", "buster", "tigger", "maggie", "lovely", "angel", "angels", "family", "friends", "forever", "blink182", "password123", "password12", "qwe123", "1qaz2wsx", "aa123456", "abcd1234", "a123456", "123qwe", "q1w2e3r4", "987654321", "11111111", "00000000", "88888888", "112233", "123654", "159753", "147258", "147258369", "789456123", "555555", "777777", "999999", "222222", "696969", "202020", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "test", "test123", "testing", "guest", "root", "toor", "changeme", "default", "user", "demo", "shalom", "shalom123", "israel", "israel123", "tel aviv", "telaviv", "yerushalayim", "jerusalem", "maccabi", "hapoel", "beitar", "ahava"]);
+const T={
+ en:{tag:"Password strength and breach checks, fully private",checkTitle:"🔍 Check a password",ph:"Type a password to test it",pwnBtn:"🛡️ Check data breaches",privacyNote:"Only 5 characters of a hash leave your device",
+  genTitle:"🎲 Random password",length:"Length",genBtn:"Generate",copy:"Copy",copied:"Copied!",ppTitle:"🧩 Passphrase",words:"Words",ppNote:"Random words are strong and easy to remember.",ppBtn:"Generate",
+  foot:"Nothing you type is stored or sent. Built by Noya Adivi.",apiLink:"API docs",labels:["Very weak","Weak","Fair","Strong","Very strong"],crack:"Time to crack: ",
+  units:["instantly","seconds","minutes","hours","days","years","centuries"],
+  chips:{length_12:"12+ chars",upper:"A-Z",lower:"a-z",digit:"0-9",symbol:"Symbol",not_common:"Not common",no_repeats:"No repeats",no_sequences:"No sequences",no_keyboard:"No keyboard pattern",no_years:"No years"},
+  tips:{not_common:"This is one of the most common passwords.",length_12:"Use at least 12 characters.",upper:"Add an uppercase letter.",lower:"Add a lowercase letter.",digit:"Add a number.",symbol:"Add a symbol such as ! or #.",no_repeats:"Avoid repeated characters like 'aaa'.",no_sequences:"Avoid sequences like 'abc' or '123'.",no_keyboard:"Avoid keyboard patterns like 'qwerty'.",no_years:"Years are easy to guess."},
+  empty:"Type a password first.",sending:"Sent to HIBP: ",checking:"Checking…",pwned:n=>`⚠️ Found in ${n.toLocaleString()} data breaches. Never use this password.`,clean:"✅ Not found in known data breaches.",err:"The breach service did not answer. Try again in a moment."},
+ he:{tag:"בדיקת חוזק ודליפות סיסמאות, בפרטיות מלאה",checkTitle:"🔍 בדיקת סיסמה",ph:"הקלידו סיסמה כדי לבדוק אותה",pwnBtn:"🛡️ בדיקת דליפות מידע",privacyNote:"רק 5 תווים מה־hash יוצאים מהמכשיר",
+  genTitle:"🎲 סיסמה אקראית",length:"אורך",genBtn:"יצירה",copy:"העתקה",copied:"הועתק!",ppTitle:"🧩 משפט סיסמה",words:"מילים",ppNote:"מילים אקראיות הן חזקות וקלות לזכירה.",ppBtn:"יצירה",
+  foot:"שום דבר שמקלידים לא נשמר ולא נשלח. נבנה על ידי נויה אדיבי.",apiLink:"תיעוד ה־API",labels:["חלשה מאוד","חלשה","בינונית","חזקה","חזקה מאוד"],crack:"זמן לפיצוח: ",
+  units:["מיד","שניות","דקות","שעות","ימים","שנים","מאות שנים"],
+  chips:{length_12:"12+ תווים",upper:"A-Z",lower:"a-z",digit:"0-9",symbol:"סימן",not_common:"לא נפוצה",no_repeats:"בלי חזרות",no_sequences:"בלי רצפים",no_keyboard:"בלי דפוס מקלדת",no_years:"בלי שנים"},
+  tips:{not_common:"זו אחת הסיסמאות הנפוצות ביותר.",length_12:"כדאי להשתמש ב־12 תווים לפחות.",upper:"כדאי להוסיף אות גדולה.",lower:"כדאי להוסיף אות קטנה.",digit:"כדאי להוסיף ספרה.",symbol:"כדאי להוסיף סימן כמו ! או #.",no_repeats:"כדאי להימנע מתווים חוזרים כמו 'aaa'.",no_sequences:"כדאי להימנע מרצפים כמו 'abc' או '123'.",no_keyboard:"כדאי להימנע מדפוסי מקלדת כמו 'qwerty'.",no_years:"שנים קלות לניחוש."},
+  empty:"קודם צריך להקליד סיסמה.",sending:"נשלח ל־HIBP: ",checking:"בודקים…",pwned:n=>`⚠️ נמצאה ב־${n.toLocaleString()} דליפות מידע. אסור להשתמש בסיסמה הזו.`,clean:"✅ לא נמצאה בדליפות מידע מוכרות.",err:"שירות הדליפות לא ענה. כדאי לנסות שוב בעוד רגע."}
+};
+let lang=(new URLSearchParams(location.search).get("lang")||(navigator.language||"").slice(0,2))==="he"?"he":"en";
+const $=id=>document.getElementById(id), COLORS=["#F5B8C8","#FFB4A2","#FFE08A","#A9E3CD","#7FD3B0"];
+const ROWS=["qwertyuiop","asdfghjkl","zxcvbnm","1234567890","1qaz2wsx3edc"];
+const LEET={"@":"a","4":"a","3":"e","1":"i","!":"i","0":"o","$":"s","5":"s","7":"t"};
+const leet=s=>s.replace(/[@431!0$57]/g,c=>LEET[c]);
+function isCommon(p){const l=p.toLowerCase(),s=l.replace(/[\d!@#$%^&*.]+$/,"");return [l,s,leet(l),leet(s)].some(x=>COMMON.has(x))}
+function hasSeq(p){const l=p.toLowerCase();for(let i=0;i<l.length-2;i++){const a=l.charCodeAt(i),b=l.charCodeAt(i+1),c=l.charCodeAt(i+2);if(/^[a-z0-9]{3}$/.test(l.slice(i,i+3))&&((b-a===1&&c-b===1)||(b-a===-1&&c-b===-1)))return true}return false}
+function hasKb(p){const l=p.toLowerCase();return ROWS.some(r=>{for(let i=0;i<=r.length-4;i++){const x=r.slice(i,i+4);if(l.includes(x)||l.includes([...x].reverse().join("")))return true}return false})}
+function analyze(p){
+ const c={length_12:p.length>=12,upper:/[A-Z]/.test(p),lower:/[a-z]/.test(p),digit:/\d/.test(p),symbol:/[^\p{L}\p{N}]/u.test(p),not_common:!isCommon(p),no_repeats:!/(.)\1\1/.test(p),no_sequences:!hasSeq(p),no_keyboard:!hasKb(p),no_years:!/(19|20)\d\d/.test(p)};
+ let pool=0;if(/[a-z]/.test(p))pool+=26;if(/[A-Z]/.test(p))pool+=26;if(/\d/.test(p))pool+=10;if(/[ !-\/:-@\[-`{-~]/.test(p))pool+=33;if(/[^\x00-\x7f]/.test(p))pool+=40;
+ let bits=pool?[...p].length*Math.log2(pool):0;bits-=(c.no_repeats?0:8)+(c.no_sequences?0:8)+(c.no_keyboard?0:12)+(c.no_years?0:6);bits=Math.max(0,bits);if(!c.not_common)bits=Math.min(bits,10);
+ let score=bits<28?0:bits<40?1:bits<60?2:bits<80?3:4;if(!c.not_common)score=0;
+ return {c,bits,score,secs:Math.pow(2,bits)/2/1e10};
+}
+function crack(s){const u=T[lang].units;if(s<1)return u[0];const st=[[60,1,1],[3600,2,60],[86400,3,3600],[31536000,4,86400],[3153600000,5,31536000]];for(const[l,i,d]of st)if(s<l)return Math.floor(s/d)+" "+u[i];return u[6]}
+function render(){
+ const p=$("pw").value,L=T[lang],spans=$("meter").children;
+ if(!p){[...spans].forEach(s=>{s.style.background="";s.classList.remove("on")});$("label").innerHTML="&nbsp;";$("crack").textContent="";$("chips").innerHTML="";$("tips").innerHTML="";return}
+ const r=analyze(p);
+ [...spans].forEach((s,i)=>{const on=i<=r.score;s.style.background=on?COLORS[r.score]:"";s.classList.toggle("on",on)});
+ $("label").textContent=L.labels[r.score];$("label").style.color=["#A03A5C","#A8483A","#8A6A12","#1F7350","#1F7350"][r.score];
+ $("crack").textContent=L.crack+crack(r.secs);
+ $("chips").innerHTML=Object.entries(r.c).map(([k,v])=>`<span class="chip ${v?"ok":"bad"}">${v?"✓":"✗"} ${L.chips[k]}</span>`).join("");
+ $("tips").innerHTML=Object.entries(r.c).filter(([,v])=>!v).map(([k])=>`<li>${L.tips[k]}</li>`).join("");
+}
+async function sha1(t){const b=await crypto.subtle.digest("SHA-1",new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("").toUpperCase()}
+async function checkPwned(){
+ const p=$("pw").value,L=T[lang],res=$("pwnRes");
+ if(!p){res.className="result info";res.textContent=L.empty;return}
+ const h=await sha1(p),pre=h.slice(0,5),suf=h.slice(5);
+ $("hash").hidden=false;$("hash").innerHTML=`SHA-1: <b>${pre}</b>${suf}<br>${L.sending}<b>${pre}</b>`;
+ res.className="result info";res.textContent=L.checking;
+ try{
+  const r=await fetch("https://api.pwnedpasswords.com/range/"+pre,{referrerPolicy:"no-referrer"});
+  if(!r.ok)throw 0;const body=await r.text();
+  let n=0;for(const line of body.split("\n")){const[s,c]=line.trim().split(":");if(s===suf){n=parseInt(c,10)||0;break}}
+  res.className="result "+(n?"bad":"good");res.textContent=n?L.pwned(n):L.clean;
+ }catch(e){res.className="result info";res.textContent=L.err}
+}
+function rnd(n){const a=new Uint32Array(1),lim=Math.floor(4294967296/n)*n;let x;do{crypto.getRandomValues(a);x=a[0]}while(x>=lim);return x%n}
+function genPw(){
+ const g=[[$("oU").checked,"ABCDEFGHIJKLMNOPQRSTUVWXYZ"],[$("oL").checked,"abcdefghijklmnopqrstuvwxyz"],[$("oD").checked,"0123456789"],[$("oS").checked,"!@#$%^&*()-_=+[]{};:,.?/~"]].filter(x=>x[0]).map(x=>x[1]);
+ if(!g.length){$("oL").checked=true;return genPw()}
+ const all=g.join(""),n=+$("len").value,out=g.map(s=>s[rnd(s.length)]);
+ while(out.length<n)out.push(all[rnd(all.length)]);
+ for(let i=out.length-1;i>0;i--){const j=rnd(i+1);[out[i],out[j]]=[out[j],out[i]]}
+ $("gen").value=out.join("");
+}
+function genPp(){const n=+$("words").value,w=[];for(let i=0;i<n;i++){const x=WORDS[rnd(WORDS.length)];w.push(x[0].toUpperCase()+x.slice(1))}w.push(rnd(100));$("pp").value=w.join("-")}
+function applyLang(){
+ const L=T[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==="he"?"rtl":"ltr";
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=L[e.dataset.i]);
+ document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=L[e.dataset.ph]);
+ $("lang").textContent=lang==="he"?"🌐 English":"🌐 עברית";render();$("pwnRes").className="result";$("hash").hidden=true;
+}
+$("lang").onclick=()=>{lang=lang==="he"?"en":"he";applyLang()};
+$("pw").oninput=()=>{render();$("pwnRes").className="result";$("hash").hidden=true};
+$("eye").onclick=()=>{$("pw").type=$("pw").type==="password"?"text":"password"};
+$("pwnBtn").onclick=checkPwned;$("genBtn").onclick=genPw;$("ppBtn").onclick=genPp;
+$("len").oninput=e=>{$("lenVal").textContent=e.target.value;genPw()};$("words").oninput=e=>{$("wVal").textContent=e.target.value;genPp()};
+["oU","oL","oD","oS"].forEach(id=>$(id).onchange=genPw);
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText($(b.dataset.copy).value);b.textContent=T[lang].copied;setTimeout(()=>b.textContent=T[lang].copy,1400)});
+applyLang();genPw();genPp();
+</script>
+</body>
+</html>
