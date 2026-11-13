@@ -56,7 +56,7 @@ def test_pwned_sends_only_prefix(client):
     assert r.json()["pwned"] is True
     url = app.state.http.urls[-1]
     assert url.endswith("/range/" + sha1_hex(LEAKED)[:5])
-    assert LEAKED not in url
+    assert LEAKED not in url.split("/range/")[1]  # the host name itself contains "password"
 
 
 def test_pwned_hash(client):
