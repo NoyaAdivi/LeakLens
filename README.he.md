@@ -22,7 +22,7 @@
 <h3 align="center">לבדוק סיסמה בלי למסור אותה לאף אחד.</h3>
 
 <p align="center">
-  LeakLens הוא REST API שמדרג את חוזק הסיסמה, בודק אם היא הופיעה בדליפות מידע ויוצר סיסמאות מאובטחות.<br>
+  LeakLens הוא מעבדת אבטחה אינטראקטיבית וגם REST API: הוא מצלם רנטגן לדפוסים בסיסמה, מריץ אותה במרוץ מול תוקפים אמיתיים, בודק דליפות מידע ויוצר סיסמאות מאובטחות.<br>
   הסיסמה לא נשמרת, לא נרשמת ביומן ולא נשלחת לשום מקום. רק 5 תווים מה־hash שלה יוצאים מהשרת.
 </p>
 
@@ -31,7 +31,7 @@
     <td align="center" width="25%"><a href="#-how-your-password-stays-private"><b>🔐 5 תווים</b></a><br><sub>זה כל מה שיוצא</sub></td>
     <td align="center" width="25%"><a href="#-api-at-a-glance"><b>⚡ 7</b></a><br><sub>נקודות REST</sub></td>
     <td align="center" width="25%"><a href="https://noyaadivi.github.io/LeakLens/?lang=he"><b>🌍 HE · EN</b></a><br><sub>כל הודעה בשתי השפות</sub></td>
-    <td align="center" width="25%"><a href="https://github.com/NoyaAdivi/LeakLens/actions/workflows/tests.yml"><b>🧪 CI</b></a><br><sub>בדיקות בכל דחיפה</sub></td>
+    <td align="center" width="25%"><a href="#-try-it-in-your-browser"><b>🏁 4</b></a><br><sub>תוקפים במרוץ החי</sub></td>
   </tr>
 </table>
 
@@ -132,7 +132,30 @@ curl -X POST http://localhost:8000/v1/check \
 <p align="center"><a href="https://noyaadivi.github.io/LeakLens/?lang=he"><img src="docs/readme/playground-he.svg" width="100%" alt="לנסות בדפדפן"></a></p>
 
 <p align="center">
-  <a href="https://noyaadivi.github.io/LeakLens/?lang=he"><img src="docs/images/playground-he.png" width="85%" alt="מגרש המשחקים של LeakLens: מד חוזק, בדיקות, בדיקת דליפות, מחולל סיסמאות ומשפטי סיסמה"></a>
+  <a href="https://noyaadivi.github.io/LeakLens/?lang=he"><img src="docs/images/demo-he.gif" width="85%" alt="הקלדת סיסמה במעבדה של LeakLens: טבעת החוזק, הרנטגן ופרח טביעת האצבע מתעדכנים בזמן אמת"></a>
+</p>
+
+<table dir="rtl">
+  <tr valign="top">
+    <td width="50%"><p><b>🔎 עדשת הדליפות</b></p>זכוכית מגדלת שעוקבת אחרי הסמן וחושפת סיסמאות אמיתיות מדליפות שמסתתרות בתוך קיר של תווים אקראיים. הקשה מערבבת.</td>
+    <td width="50%"><p><b>🩻 רנטגן דפוסים</b></p>הסיסמה מתפרקת לבלוקים צבעוניים בדיוק כמו שכלי פריצה רואה אותה: סיסמאות מדליפות, מילים מהמילון, שנים, רצפי מקלדת, רצפים עוקבים וחזרות.</td>
+  </tr>
+  <tr valign="top">
+    <td width="50%"><p><b>🏁 מרוץ פריצה</b></p>ארבעה תוקפים (התחברות לאתר, לפטופ, חוות GPU, בוטנט) מתחרים מי יפרוץ אותה תוך שנה. מעבר ל<b>בעוד 10 שנים</b> מראה איך חומרה מהירה יותר משנה את התוצאה.</td>
+    <td width="50%"><p><b>🌸 פרח טביעת אצבע</b></p>פרח ייחודי ו-3 מילים שצומחים מה-hash מסוג SHA-256. אותה סיסמה, אותו פרח, כך אפשר לזהות טעות הקלדה כשהשדה מוסתר. שדה אימות בודק התאמה.</td>
+  </tr>
+  <tr valign="top">
+    <td width="50%"><p><b>✨ חיזוק בלחיצה + 📸 כרטיס דוח</b></p>לחיצה אחת משדרגת סיסמה חלשה עם מילים אקראיות. אפשר לשמור כרטיס דוח PNG לשיתוף, שאף פעם לא מכיל את הסיסמה.</td>
+    <td width="50%"><p><b>🎰 מכונת המזל של הסיסמאות</b></p>גלגלים מסתובבים בוחרים מילים אקראיות עם <code>crypto.getRandomValues</code>, או תווים אקראיים. העתקה, שליחה למעבדה או שימוש חוזר מרשימת האחרונות.</td>
+  </tr>
+  <tr valign="top">
+    <td width="50%"><p><b>🕵️ בדיקת דליפות מונפשת</b></p>רואים את 5 התווים יוצאים ל-HIBP ואת הרשימה המרופדת חוזרת, וההתאמה קורית על המכשיר שלכם.</td>
+    <td width="50%"><p><b>🛡️ תוספות פרטיות</b></p>ניקוי אוטומטי אחרי 60 שניות, התראת Caps Lock, קיצורי <kbd>/</kbd> ו-<kbd>Esc</kbd>, מצב כהה, עברית ואנגלית ותפריט נגישות נגרר.</td>
+  </tr>
+</table>
+
+<p align="center">
+  <a href="https://noyaadivi.github.io/LeakLens/?lang=he#arena"><img src="docs/images/arena-he.png" width="85%" alt="מרוץ הפריצה: ארבעה תוקפים מתחרים מי יפרוץ את הסיסמה תוך שנה"></a>
 </p>
 
 <p align="center">
@@ -141,7 +164,7 @@ curl -X POST http://localhost:8000/v1/check \
   <a href="docs/index.html"><b>קוד המקור</b></a>
 </p>
 
-<p align="center"><sub>מגרש המשחקים מריץ את אותם כללים ב־JavaScript, מחשב hash עם Web Crypto של הדפדפן ופונה ל־HIBP ישירות. בלי שרת ובלי מעקב.</sub></p>
+<p align="center"><sub>המעבדה מריצה את אותם כללים ב-JavaScript, מחשבת hash עם Web Crypto של הדפדפן ופונה ל-HIBP ישירות. בלי שרת ובלי מעקב.</sub></p>
 
 <a name="-security-by-design"></a>
 <p align="center"><a href="#-tech-stack"><img src="docs/readme/hardening-he.svg" width="100%" alt="אבטחה מהיסוד"></a></p>
@@ -219,6 +242,8 @@ curl -X POST http://localhost:8000/v1/check \
 ├── tests/             בדיקות pytest (לוגיקה ו־API)
 ├── docs/
 │   ├── index.html     מגרש המשחקים החי (GitHub Pages)
+│   ├── noya-kit.js    תפריט נגישות ומצב כהה משותפים
+│   ├── images/        צילומי מסך, GIF הדגמה ותמונות שיתוף
 │   ├── SECURITY.md    מודל האבטחה
 │   └── readme/        העיצובים של ה־README
 ├── .github/workflows/ CI

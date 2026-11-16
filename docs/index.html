@@ -46,7 +46,8 @@ nav .wrap{display:flex;align-items:center;gap:18px;height:68px}
 .brand b{background:linear-gradient(90deg,var(--coral),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
 .navlinks{display:flex;gap:4px;margin-inline-start:auto}
 .navlinks a{text-decoration:none;color:var(--ink);font-weight:600;padding:8px 12px;border-radius:12px;transition:background .2s}
-.navlinks a:hover{background:var(--lav)}
+.navlinks a:hover,.navlinks a.on{background:var(--lav)}
+.navlinks a.on{color:var(--deep)}
 .pill{border:2px solid #B3A9FA;background:linear-gradient(90deg,var(--peach),var(--lav),var(--mint));color:var(--deep);font-weight:700;border-radius:999px;padding:7px 14px;font-size:.95rem;cursor:pointer;transition:transform .2s;display:inline-flex;align-items:center;gap:6px}
 .pill:hover{transform:translateY(-2px)}
 .iconbtn{width:42px;height:42px;padding:0;justify-content:center;font-size:1.1rem}
@@ -101,6 +102,9 @@ input.pw:focus{border-color:var(--purple);box-shadow:0 0 0 6px rgba(111,96,240,.
 .chips small{color:var(--muted);font-weight:600}
 .chip{border:1.5px dashed #B3A9FA;background:var(--surface2);color:var(--ink);border-radius:12px;padding:6px 11px;font-size:.88rem;cursor:pointer;font-family:ui-monospace,Menlo,monospace;transition:transform .2s,background .2s}
 .chip:hover{transform:translateY(-2px);background:var(--lav)}
+.chip{direction:ltr;unicode-bidi:isolate}.chip.wipe{direction:inherit;font-family:Rubik,system-ui,sans-serif;font-weight:600}
+.ring .num small{direction:ltr;display:block}
+html[lang=he] input:placeholder-shown{direction:rtl;text-align:right;font-family:Rubik,system-ui,sans-serif}
 .local{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:#3C9A76;background:var(--mint);padding:5px 10px;border-radius:999px;margin-inline-start:auto}
 html[data-theme="dark"] .local{color:#9BE3C6}
 
@@ -124,7 +128,7 @@ html[data-theme="dark"] .local{color:#9BE3C6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .stats div{background:var(--surface2);border-radius:14px;padding:10px 12px;border:1px solid var(--line)}
 .stats small{display:block;color:var(--muted);font-size:.78rem;font-weight:600}
-.stats b{font-family:Fredoka,sans-serif;font-size:1.15rem}
+.stats b{font-family:Fredoka,sans-serif;font-size:1.15rem;display:inline-block;direction:ltr;unicode-bidi:isolate}
 .tips{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
 .tips li{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border-radius:14px;padding:10px 12px;font-size:.95rem;animation:pop .45s cubic-bezier(.2,.9,.3,1.3) both}
 .tips li span{flex:none}
@@ -233,10 +237,39 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 :focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+.progress{position:fixed;top:0;inset-inline-start:0;height:4px;width:0;z-index:70;background:linear-gradient(90deg,var(--coral),#C46BD8,var(--purple));border-radius:0 4px 4px 0}
+.totop{position:fixed;inset-inline-end:22px;bottom:96px;z-index:55;width:50px;height:50px;border-radius:16px;border:2px solid #B3A9FA;background:var(--surface);color:var(--deep);font-size:1.3rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:.35s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}.totop:hover{transform:translateY(-3px)}
+.rowbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn.sm{padding:9px 14px;font-size:.92rem;border-radius:13px}
+.caps{display:none;margin-top:10px;font-size:.88rem;font-weight:600;color:#A8483A;background:var(--peach);padding:6px 12px;border-radius:12px;width:max-content;animation:pop .3s both}
+.caps.show{display:block}
+html[data-theme="dark"] .caps{color:#FFC9BA}
+.kbd{font-size:.8rem;color:var(--muted);font-weight:600}
+.kbd kbd{font-family:ui-monospace,Menlo,monospace;background:var(--surface);border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:1px 6px}
+.wipe[aria-pressed="true"]{background:var(--mint);border-color:#4FBF95}
+.confirm{width:100%;margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.confirm input{width:100%;font-size:1rem;padding:11px 14px;border-radius:14px;border:2px solid #B3A9FA;background:var(--surface);color:var(--ink);outline:none;direction:ltr;text-align:left;font-family:ui-monospace,Menlo,monospace}
+.confirm input:focus{border-color:var(--purple)}
+.match{font-weight:700;font-size:.9rem;min-height:1.4em}
+.match.ok{color:#2E9C74}.match.no{color:var(--coral)}
+html[data-theme="dark"] .match.ok{color:#9BE3C6}
+.match.ok::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-inline-end:6px;animation:ping 1.4s infinite}
+.seg-toggle{display:inline-flex;background:var(--lav);padding:4px;border-radius:14px;gap:4px;margin-bottom:18px}
+.seg-toggle button{border:0;background:transparent;color:var(--deep);font-weight:700;padding:8px 14px;border-radius:11px;cursor:pointer;font-family:inherit}
+.seg-toggle button[aria-pressed="true"]{background:var(--surface);box-shadow:0 4px 12px rgba(85,72,200,.15)}
+.hist{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px;min-height:10px}
+.hist button{border:1.5px dashed #B3A9FA;background:var(--surface2);color:var(--ink);border-radius:12px;padding:6px 10px;font-size:.82rem;cursor:pointer;font-family:ui-monospace,Menlo,monospace;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;animation:pop .35s both;transition:transform .2s}
+.hist button:hover{transform:translateY(-2px);background:var(--lav)}
+.hist small{width:100%;color:var(--muted);font-weight:600}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.confetti i{position:absolute;top:-12px;width:10px;height:14px;border-radius:3px;animation:fall 1.8s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(var(--r));opacity:.2}}
 .built-by{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45em;margin:.6em 0;font-weight:600}.built-by a{display:inline-flex;align-items:center;gap:.4em;padding:.28em .8em;border-radius:999px;font-weight:800;text-decoration:none;color:inherit;background:rgba(10,102,194,.1);transition:transform .25s ease,background .25s ease,box-shadow .25s ease}.built-by a:hover,.built-by a:focus-visible{transform:translateY(-2px);background:rgba(10,102,194,.18);box-shadow:0 6px 16px rgba(10,102,194,.18)}.built-by svg{width:1.1em;height:1.1em;fill:#0A66C2;flex:none;transition:transform .35s ease}.built-by a:hover svg{transform:rotate(-8deg) scale(1.12)}html[lang="he"] .built-by .bb-en,html:not([lang="he"]) .built-by .bb-he{display:none}
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E36E57"/><stop offset=".5" stop-color="#C46BD8"/><stop offset="1" stop-color="#6F60F0"/></linearGradient></defs></svg>
 
@@ -272,7 +305,7 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
     </div>
     <div class="lenscard rv" aria-hidden="true">
       <canvas id="lens"></canvas>
-      <div class="lenscap" data-i="lensCap">🔎 Move the lens. The words hiding here are real passwords from leak lists.</div>
+      <div class="lenscap" data-i="lensCap">🔎 Move the lens, tap to shuffle. The words hiding here are real passwords from leak lists.</div>
     </div>
   </div>
 </header>
@@ -299,6 +332,11 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
         <button class="chip" type="button">correct horse battery staple</button>
         <span class="local">🔒 <span data-i="local">Never leaves this page</span></span>
       </div>
+      <div class="caps" id="caps" data-i="caps">⇪ Caps Lock is on</div>
+      <div class="chips" style="margin-top:12px">
+        <button class="chip wipe" id="wipe" type="button" aria-pressed="false">⏱️ <span id="wipeTxt">Auto-clear: off</span></button>
+        <span class="kbd" data-ih="kbd">Press <kbd>/</kbd> to type · <kbd>Esc</kbd> to clear</span>
+      </div>
     </div>
 
     <div class="grid3">
@@ -318,12 +356,21 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
           </div>
         </div>
         <ul class="tips" id="tips"></ul>
+        <div class="rowbtns">
+          <button class="btn sm" id="boost" type="button" disabled data-i="boost">✨ Make it stronger</button>
+          <button class="btn sm soft" id="card" type="button" disabled data-i="cardBtn">📸 Save report card</button>
+        </div>
       </div>
       <div class="card sigilbox rv">
         <h3>🌸 <span data-i="sigT">Password fingerprint</span></h3>
         <p class="sub" data-i="sigS">A unique flower grown from your password's hash. Same password, same flower, so you can spot a typo without ever revealing it.</p>
         <canvas id="sigil" width="440" height="440" aria-hidden="true"></canvas>
         <div class="fpw" id="fpw">· · ·</div>
+        <div class="confirm">
+          <label class="sr" for="pw2" data-i="pw2Lbl">Type it again</label>
+          <input id="pw2" type="password" autocomplete="off" spellcheck="false" placeholder="Type it again to confirm..." data-ip="ph2">
+          <div class="match" id="match" aria-live="polite"></div>
+        </div>
       </div>
     </div>
 
@@ -339,8 +386,9 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
 <section id="arena">
   <div class="wrap">
     <div class="sh rv"><span class="eyebrow" data-i="arEy">Attack race</span><h2 data-i="arT">Who cracks it within a year?</h2><p data-i="arP">Four real-world attackers start running the moment you type. If they reach the flag, your password falls within a year.</p></div>
-    <div class="card rv">
-      <div class="lanes" id="lanes"></div>
+    <div class="card rv" style="text-align:center">
+      <div class="seg-toggle"><button type="button" id="now" aria-pressed="true" data-i="now">Today</button><button type="button" id="future" aria-pressed="false" data-i="future">In 10 years (32x faster)</button></div>
+      <div class="lanes" id="lanes" style="text-align:start"></div>
       <p class="arena-note" data-i="arNote">Estimates assume the attacker knows common patterns and has a stolen copy of the password hash (except the website attacker, who must guess online).</p>
     </div>
   </div>
@@ -396,6 +444,7 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
         <button class="btn soft" id="toLab" type="button" data-i="toLab">🔍 Test in the lab</button>
         <span class="bits" id="genBits">0 bits</span>
       </div>
+      <div class="hist" id="hist"></div>
     </div>
   </div>
 </section>
@@ -435,6 +484,7 @@ footer nav,footer .fl{position:static;background:none;border:0;backdrop-filter:n
   <p class="built-by"><span class="bb-en">Built by</span><span class="bb-he">נבנה על ידי</span> <a href="https://www.linkedin.com/in/noya-adivi/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg><span class="bb-en">Noya</span><span class="bb-he">נויה</span></a></p>
 </footer>
 <div class="toast" id="toast" role="status"></div>
+<button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
 
 <script>
 (function(){
@@ -455,13 +505,13 @@ const COLORS={common:'--c-common',word:'--c-word',year:'--c-year',keyboard:'--c-
 
 /* ---------- i18n ---------- */
 const T={en:{
-nLab:'Lab',nArena:'Attack race',nGen:'Generator',nHow:'Privacy',nFaq:'FAQ',eyebrow:'100% in your browser · open source',h1a:'See your password',h1b:'the way a hacker does.',lead:'X-ray its hidden patterns, race it against real attackers, give it a visual fingerprint and check leaks without ever sending it.',cta1:'🔍 Open the lab',cta2:'🎰 Spin a new one',f1:'bytes of your password sent',f2:'hash characters, that is all',f3:'attackers in the race',lensCap:'🔎 Move the lens. The words hiding here are real passwords from leak lists.',
+nLab:'Lab',nArena:'Attack race',nGen:'Generator',nHow:'Privacy',nFaq:'FAQ',eyebrow:'100% in your browser · open source',h1a:'See your password',h1b:'the way a hacker does.',lead:'X-ray its hidden patterns, race it against real attackers, give it a visual fingerprint and check leaks without ever sending it.',cta1:'🔍 Open the lab',cta2:'🎰 Spin a new one',f1:'bytes of your password sent',f2:'hash characters, that is all',f3:'attackers in the race',lensCap:'🔎 Move the lens, tap to shuffle. The words hiding here are real passwords from leak lists.',
 labEy:'The lab',labT:'Put your password under the lens',labP:'Type and watch. Every result is computed right here on your device.',pwLbl:'Password',ph:'Type a password...',try:'Try:',local:'Never leaves this page',scoreT:'Strength report',scoreS:'Based on how real cracking tools guess, not on silly rules.',vEmpty:'Waiting for you...',stBits:'Entropy',stLen:'Length',stGuess:'Guesses needed',stPat:'Patterns found',sigT:'Password fingerprint',sigS:"A unique flower grown from your password's hash. Same password, same flower, so you can spot a typo without ever revealing it.",xrT:'Pattern X-ray',xrS:'How a cracking tool actually splits your password. Every colored block is a shortcut an attacker can take.',xrE:"Your password's skeleton will appear here.",
 arEy:'Attack race',arT:'Who cracks it within a year?',arP:'Four real-world attackers start running the moment you type. If they reach the flag, your password falls within a year.',arNote:'Estimates assume the attacker knows common patterns and has a stolen copy of the password hash (except the website attacker, who must guess online).',
 lkT:'Private leak check',lkS:'We hash your password with SHA-1 and send only the first 5 characters. The breach service returns hundreds of matches and your browser finds yours locally.',nYou:'You',hashE:'SHA-1 hash will appear here',lkBtn:'🔎 Check leaks privately',whyT:'Why patterns matter',whyS:'Cracking tools never start with random guesses. They try what people actually do:',
 gEy:'Generator',gT:'The password slot machine',gP:"Pull the lever for a strong password made with your browser's secure random generator.",tPhrase:'Passphrase',tRandom:'Random characters',oWords:'Words',oSep:'Separator',oSpace:'space',oCap:'Capitals',oNum:'Add a number',oLen:'Length',oSym:'Symbols',spin:'🎰 Spin',copy:'📋 Copy',toLab:'🔍 Test in the lab',
 hEy:'Privacy by design',hT:'Your password stays yours',h1t:'Analyzed on your device',h1p:'The X-ray, the race and the fingerprint are pure JavaScript running in this tab. Nothing is logged, stored or sent.',h2t:'k-anonymity for leaks',h2p:'Only the first 5 characters of a SHA-1 hash go out, shared with hundreds of other passwords. Padding hides even the response size.',h3t:'Locked-down page',h3p:'A strict Content Security Policy only allows talking to the breach service, and there are no trackers or analytics at all.',devT:'Also a Python API',devP:'The same engine runs as a FastAPI service with Docker, tests and CI. Strength, breach and generator endpoints are ready to plug in.',devBtn:'⭐ View on GitHub',
-qT:'Good questions',q1:'Is it safe to type my real password here?',a1:'Yes. The analysis never leaves your browser, and the leak check only sends 5 characters of a hash. You can even open the page, turn off your internet and the lab still works.',q2:'Why does "P@ssw0rd!" score so low?',a2:'Because swapping a for @ and o for 0 is the first trick cracking tools try. Length and real randomness beat clever substitutions every time.',q3:'What is the fingerprint flower?',a3:'It is drawn from the SHA-256 hash of what you typed. It cannot be reversed, but the same password always grows the same flower, so you can tell if you typed it right while the field stays hidden.',q4:'Is a passphrase really better?',a4:'Several random words are easy to remember and long. The key word is random: words you pick yourself are far easier to guess than words the slot machine picks for you.',sec:'Security notes',
+qT:'Good questions',q1:'Is it safe to type my real password here?',a1:'Yes. The analysis never leaves your browser, and the leak check only sends 5 characters of a hash. You can even open the page, turn off your internet and the lab still works.',q2:'Why does "P@ssw0rd!" score so low?',a2:'Because swapping a for @ and o for 0 is the first trick cracking tools try. Length and real randomness beat clever substitutions every time.',q3:'What is the fingerprint flower?',a3:'It is drawn from the SHA-256 hash of what you typed. It cannot be reversed, but the same password always grows the same flower, so you can tell if you typed it right while the field stays hidden.',q4:'Is a passphrase really better?',a4:'Several random words are easy to remember and long. The key word is random: words you pick yourself are far easier to guess than words the slot machine picks for you.',sec:'Security notes',caps:'⇪ Caps Lock is on',kbd:'Press <kbd>/</kbd> to type · <kbd>Esc</kbd> to clear',wipeOff:'Auto-clear: off',wipeOn:s=>`Auto-clear in ${s}s`,wiped:'🧽 Cleared for your privacy',boost:'✨ Make it stronger',cardBtn:'📸 Save report card',boosted:'✨ Upgraded! Your password plus 3 random words.',already:'💪 Already strong. Nothing to add!',pw2Lbl:'Type it again',ph2:'Type it again to confirm...',matchOk:'Match! Same fingerprint.',matchNo:'Not the same yet',now:'Today',future:'In 10 years (32x faster)',hist:'Recent (click to copy):',cardSaved:'📸 Report card saved. It contains no password.',cardTitle:'Password report card',cardFoot:'No password inside · noyaadivi.github.io/LeakLens',cardPat:'Patterns',none:'none',
 v:['Cracked in a blink','Very weak','Could be better','Strong','Fortress'],bits:'bits',pat:{common:'Leaked classic',word:'Dictionary word',year:'Year or date',keyboard:'Keyboard walk',sequence:'Sequence',repeat:'Repeat',random:'Random-ish'},
 lanes:[['🐌','Website login','10 guesses a second'],['💻','Hacker laptop','1 billion a second'],['🎮','GPU rig','100 billion a second'],['🕸️','Botnet','10 trillion a second']],cracked:'🔓 ',safe:'🛡️ ',
 tips:{long:'Go longer: 14+ characters beats any clever trick.',common:'This exact password is on leak lists. Never use it anywhere.',word:'Dictionary words are guessed first, even with @ instead of a.',year:'Years and dates are tried early. Leave out birthdays.',keyboard:'Keyboard walks like qwerty are in every cracking list.',sequence:'Sequences like abc or 123 add almost nothing.',repeat:'Repeated characters barely help.',mix:'Add another kind of character, or simply go much longer.',great:'Excellent! Use it in one place only and keep it in a password manager.'},
@@ -469,13 +519,13 @@ why:[['🔁','Leaked classics first: millions of real passwords from past breach
 leakBad:n=>`😱 Seen ${n.toLocaleString('en')} times in data breaches. Change it everywhere you use it.`,leakGood:'🎉 Not found in any known breach. Nice!',leakErr:'😕 Could not reach the breach service. Check your connection and try again.',leakWait:'Checking...',copied:'Copied! 📋',instant:'instantly',eternity:'forever ∞',
 units:{s:['second','seconds'],m:['minute','minutes'],h:['hour','hours'],d:['day','days'],mo:['month','months'],y:['year','years'],c:['century','centuries']},guessesK:['','K','M','B','T']
 },he:{
-nLab:'מעבדה',nArena:'מרוץ פריצה',nGen:'מחולל',nHow:'פרטיות',nFaq:'שאלות',eyebrow:'100% בדפדפן שלך · קוד פתוח',h1a:'תראו את הסיסמה שלכם',h1b:'בעיניים של האקר.',lead:'צילום רנטגן לדפוסים הנסתרים, מרוץ מול תוקפים אמיתיים, טביעת אצבע ויזואלית ובדיקת דליפות, בלי לשלוח את הסיסמה לאף אחד.',cta1:'🔍 למעבדה',cta2:'🎰 סיבוב לסיסמה חדשה',f1:'בייטים מהסיסמה נשלחים',f2:'תווים מה-hash, זה הכל',f3:'תוקפים במרוץ',lensCap:'🔎 הזיזו את העדשה. המילים שמסתתרות כאן הן סיסמאות אמיתיות מרשימות דליפה.',
+nLab:'מעבדה',nArena:'מרוץ פריצה',nGen:'מחולל',nHow:'פרטיות',nFaq:'שאלות',eyebrow:'100% בדפדפן שלך · קוד פתוח',h1a:'תראו את הסיסמה שלכם',h1b:'בעיניים של האקר.',lead:'צילום רנטגן לדפוסים הנסתרים, מרוץ מול תוקפים אמיתיים, טביעת אצבע ויזואלית ובדיקת דליפות, בלי לשלוח את הסיסמה לאף אחד.',cta1:'🔍 למעבדה',cta2:'🎰 סיבוב לסיסמה חדשה',f1:'בייטים מהסיסמה נשלחים',f2:'תווים מה-hash, זה הכל',f3:'תוקפים במרוץ',lensCap:'🔎 הזיזו את העדשה, הקישו לערבוב. המילים שמסתתרות כאן הן סיסמאות אמיתיות מרשימות דליפה.',
 labEy:'המעבדה',labT:'שימו את הסיסמה מתחת לעדשה',labP:'הקלידו וצפו. כל תוצאה מחושבת כאן, על המכשיר שלכם.',pwLbl:'סיסמה',ph:'הקלידו סיסמה...',try:'נסו:',local:'לא יוצאת מהדף',scoreT:'דוח חוזק',scoreS:'לפי האופן שבו כלי פריצה אמיתיים מנחשים, לא לפי חוקים שרירותיים.',vEmpty:'מחכים לכם...',stBits:'אנטרופיה',stLen:'אורך',stGuess:'ניחושים נדרשים',stPat:'דפוסים שנמצאו',sigT:'טביעת אצבע לסיסמה',sigS:'פרח ייחודי שצומח מה-hash של הסיסמה. אותה סיסמה, אותו פרח, כך אפשר לזהות טעות הקלדה בלי לחשוף אותה.',xrT:'רנטגן דפוסים',xrS:'כך כלי פריצה באמת מפרק את הסיסמה. כל בלוק צבעוני הוא קיצור דרך לתוקף.',xrE:'השלד של הסיסמה יופיע כאן.',
 arEy:'מרוץ פריצה',arT:'מי יפרוץ אותה תוך שנה?',arP:'ארבעה תוקפים אמיתיים מתחילים לרוץ ברגע שמקלידים. אם הם מגיעים לדגל, הסיסמה נופלת תוך שנה.',arNote:'ההערכות מניחות שהתוקף מכיר דפוסים נפוצים ומחזיק עותק גנוב של ה-hash (חוץ מתוקף האתר, שחייב לנחש אונליין).',
 lkT:'בדיקת דליפות פרטית',lkS:'מצפינים את הסיסמה ב-SHA-1 ושולחים רק את 5 התווים הראשונים. השירות מחזיר מאות התאמות והדפדפן מוצא את שלכם מקומית.',nYou:'אתם',hashE:'ה-hash יופיע כאן',lkBtn:'🔎 בדיקת דליפות פרטית',whyT:'למה דפוסים חשובים',whyS:'כלי פריצה אף פעם לא מתחילים מניחושים אקראיים. הם מנסים את מה שאנשים באמת עושים:',
 gEy:'מחולל',gT:'מכונת המזל של הסיסמאות',gP:'מושכים בידית ומקבלים סיסמה חזקה ממחולל האקראיות המאובטח של הדפדפן.',tPhrase:'משפט סיסמה',tRandom:'תווים אקראיים',oWords:'מילים',oSep:'מפריד',oSpace:'רווח',oCap:'אותיות גדולות',oNum:'הוספת מספר',oLen:'אורך',oSym:'סימנים',spin:'🎰 סיבוב',copy:'📋 העתקה',toLab:'🔍 בדיקה במעבדה',
 hEy:'פרטיות מהיסוד',hT:'הסיסמה נשארת שלכם',h1t:'מנותחת על המכשיר שלכם',h1p:'הרנטגן, המרוץ וטביעת האצבע הם JavaScript שרץ בלשונית הזו. שום דבר לא נרשם, נשמר או נשלח.',h2t:'k-anonymity לדליפות',h2p:'רק 5 התווים הראשונים של ה-hash יוצאים, משותפים עם מאות סיסמאות אחרות. ריפוד מסתיר אפילו את גודל התשובה.',h3t:'דף נעול',h3p:'מדיניות אבטחת תוכן קפדנית מאפשרת לדבר רק עם שירות הדליפות, ואין שום מעקב או אנליטיקס.',devT:'גם API בפייתון',devP:'אותו מנוע רץ כשירות FastAPI עם Docker, בדיקות ו-CI. נקודות קצה לחוזק, דליפות ומחולל מוכנות לשימוש.',devBtn:'⭐ ל-GitHub',
-qT:'שאלות טובות',q1:'בטוח להקליד כאן את הסיסמה האמיתית שלי?',a1:'כן. הניתוח לא יוצא מהדפדפן, ובדיקת הדליפות שולחת רק 5 תווים של hash. אפשר אפילו לפתוח את הדף, לנתק את האינטרנט, והמעבדה עדיין עובדת.',q2:'למה "P@ssw0rd!" מקבלת ציון נמוך?',a2:'כי החלפת a ב-@ ו-o ב-0 היא הטריק הראשון שכלי פריצה מנסים. אורך ואקראיות אמיתית מנצחים החלפות חכמות בכל פעם.',q3:'מה זה פרח טביעת האצבע?',a3:'הוא מצויר מה-hash מסוג SHA-256 של מה שהקלדתם. אי אפשר לשחזר ממנו את הסיסמה, אבל אותה סיסמה תמיד מצמיחה אותו פרח, כך שאפשר לדעת שהקלדתם נכון גם כשהשדה מוסתר.',q4:'משפט סיסמה באמת עדיף?',a4:'כמה מילים אקראיות קלות לזכירה וארוכות. המילה החשובה היא אקראיות: מילים שבוחרים לבד קלות לניחוש בהרבה ממילים שמכונת המזל בוחרת.',sec:'הערות אבטחה',
+qT:'שאלות טובות',q1:'בטוח להקליד כאן את הסיסמה האמיתית שלי?',a1:'כן. הניתוח לא יוצא מהדפדפן, ובדיקת הדליפות שולחת רק 5 תווים של hash. אפשר אפילו לפתוח את הדף, לנתק את האינטרנט, והמעבדה עדיין עובדת.',q2:'למה "P@ssw0rd!" מקבלת ציון נמוך?',a2:'כי החלפת a ב-@ ו-o ב-0 היא הטריק הראשון שכלי פריצה מנסים. אורך ואקראיות אמיתית מנצחים החלפות חכמות בכל פעם.',q3:'מה זה פרח טביעת האצבע?',a3:'הוא מצויר מה-hash מסוג SHA-256 של מה שהקלדתם. אי אפשר לשחזר ממנו את הסיסמה, אבל אותה סיסמה תמיד מצמיחה אותו פרח, כך שאפשר לדעת שהקלדתם נכון גם כשהשדה מוסתר.',q4:'משפט סיסמה באמת עדיף?',a4:'כמה מילים אקראיות קלות לזכירה וארוכות. המילה החשובה היא אקראיות: מילים שבוחרים לבד קלות לניחוש בהרבה ממילים שמכונת המזל בוחרת.',sec:'הערות אבטחה',caps:'⇪ ה-Caps Lock דלוק',kbd:'<kbd>/</kbd> להקלדה · <kbd>Esc</kbd> לניקוי',wipeOff:'ניקוי אוטומטי: כבוי',wipeOn:s=>`ניקוי בעוד ${s} שניות`,wiped:'🧽 נוקה לשמירה על הפרטיות',boost:'✨ לחזק את הסיסמה',cardBtn:'📸 שמירת כרטיס דוח',boosted:'✨ שודרגה! הסיסמה שלכם ועוד 3 מילים אקראיות.',already:'💪 כבר חזקה. אין מה להוסיף!',pw2Lbl:'הקלידו שוב',ph2:'הקלידו שוב לאימות...',matchOk:'תואם! אותה טביעת אצבע.',matchNo:'עדיין לא זהה',now:'היום',future:'בעוד 10 שנים (פי 32 מהר יותר)',hist:'אחרונות (לחיצה להעתקה):',cardSaved:'📸 כרטיס הדוח נשמר. אין בו סיסמה.',cardTitle:'כרטיס דוח סיסמה',cardFoot:'אין כאן סיסמה · noyaadivi.github.io/LeakLens',cardPat:'דפוסים',none:'אין',
 v:['נפרצת כהרף עין','חלשה מאוד','יש מקום לשיפור','חזקה','מבצר'],bits:'ביט',pat:{common:'סיסמה מדליפות',word:'מילה מהמילון',year:'שנה או תאריך',keyboard:'רצף מקלדת',sequence:'רצף עוקב',repeat:'חזרה',random:'אקראי'},
 lanes:[['🐌','התחברות לאתר','10 ניחושים בשנייה'],['💻','לפטופ של האקר','מיליארד בשנייה'],['🎮','חוות GPU','100 מיליארד בשנייה'],['🕸️','בוטנט','10 טריליון בשנייה']],cracked:'🔓 ',safe:'🛡️ ',
 tips:{long:'להאריך: 14 תווים ומעלה מנצחים כל טריק.',common:'הסיסמה הזו בדיוק מופיעה ברשימות דליפה. לא להשתמש בה בשום מקום.',word:'מילים מהמילון מנוחשות ראשונות, גם עם @ במקום a.',year:'שנים ותאריכים נבדקים מוקדם. עדיף בלי ימי הולדת.',keyboard:'רצפי מקלדת כמו qwerty נמצאים בכל רשימת פריצה.',sequence:'רצפים כמו abc או 123 כמעט לא מוסיפים כלום.',repeat:'תווים חוזרים כמעט לא עוזרים.',mix:'להוסיף סוג תו נוסף, או פשוט להאריך הרבה.',great:'מצוין! להשתמש בה רק במקום אחד ולשמור במנהל סיסמאות.'},
@@ -491,6 +541,8 @@ function applyLang(){
   root.lang=lang;root.dir=lang==='he'?'rtl':'ltr';
   $$('[data-i]').forEach(el=>{const v=t(el.dataset.i);if(typeof v==='string')el.textContent=v});
   $$('[data-ip]').forEach(el=>el.placeholder=t(el.dataset.ip));
+  $$('[data-ih]').forEach(el=>el.innerHTML=t(el.dataset.ih));
+  $('#totop').setAttribute('aria-label',lang==='he'?'חזרה למעלה':'Back to top');wipePaint();histPaint();matchPaint();
   $('#langBtn').textContent=lang==='he'?'English':'עברית';
   document.title=lang==='he'?'LeakLens · תראו את הסיסמה בעיני האקר':'LeakLens · See your password the way a hacker does';
   $('#whyList').innerHTML=t('why').map(([e,s])=>`<li><span>${e}</span>${s}</li>`).join('');
@@ -570,11 +622,11 @@ function fmtGuess(lg){
 
 /* ---------- lab ui ---------- */
 const pw=$('#pw'),VCOL=['#E36E57','#F29A6B','#E8B847','#4FBF95','#6F60F0'];
-let peek=false,lastPw=null,curA=null;
-$('#peek').onclick=()=>{peek=!peek;pw.type=peek?'text':'password';$('#peek').setAttribute('aria-pressed',peek);$('#peek').textContent=peek?'🙈':'👁️';update(true)};
-$('#clear').onclick=()=>{pw.value='';update();pw.focus()};
+let peek=false,lastPw=null,curA=null,prevScore=-1;
+$('#peek').onclick=()=>{peek=!peek;pw.type=$('#pw2').type=peek?'text':'password';$('#peek').setAttribute('aria-pressed',peek);$('#peek').textContent=peek?'🙈':'👁️';update(true)};
+$('#clear').onclick=()=>{pw.value='';$('#pw2').value='';update();pw.focus()};
 $$('.chip').forEach(c=>c.onclick=()=>{pw.value=c.textContent;update();pw.focus()});
-pw.addEventListener('input',()=>update());
+pw.addEventListener('input',()=>{update();wipeArm()});
 
 function update(force){
   const v=pw.value;if(v===lastPw&&!force)return;const changed=v!==lastPw;lastPw=v;
@@ -588,18 +640,20 @@ function update(force){
   $('#stLen').textContent=a?a.L:0;$('#stGuess').textContent=a?fmtGuess(a.lg):0;$('#stPat').textContent=a?a.pats:0;
   // tips
   const tips=[];if(a){const T2=t('tips');['common','word','year','keyboard','sequence','repeat'].forEach(k=>a.types.has(k)&&tips.push(T2[k]));if(a.L<12)tips.unshift(T2.long);if(a.classes<2&&a.L<16)tips.push(T2.mix);if(a.score===4&&!a.types.has('common'))tips.splice(0,tips.length,T2.great)}
-  $('#tips').innerHTML=tips.slice(0,4).map(x=>`<li><span>${a.score===4?'✨':'👉'}</span>${x}</li>`).join('');
+  $('#tips').innerHTML=tips.slice(0,4).map(x=>`<li><span>${x===t('tips').great?'✨':'👉'}</span>${x}</li>`).join('');
   // xray
   const xr=$('#xray');
   if(!a)xr.innerHTML=`<span class="empty">${t('xrE')}</span>`;
   else xr.innerHTML=a.segs.map(sg=>`<div class="seg" style="--seg:var(${COLORS[sg.t]})"><div class="tiles">${sg.tok.map(c=>`<b>${peek?esc(c===' '?'␣':c):'•'}</b>`).join('')}</div><small>${t('pat')[sg.t]}</small></div>`).join('');
-  race(a);
+  race(a);matchPaint();
+  $('#boost').disabled=$('#card').disabled=!a;
+  if(a&&a.score===4&&prevScore<4&&changed)confetti();prevScore=a?a.score:-1;
   if(changed){sigil.set(v);leakPrep(v)}
 }
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 /* ---------- attack race ---------- */
-const RATES=[10,1e9,1e11,1e13],WINDOW=31557600;
+const RATES=[10,1e9,1e11,1e13],WINDOW=31557600;let speedup=1;
 function buildLanes(){$('#lanes').innerHTML=t('lanes').map(([e,n,r],i)=>`<div class="lane" id="lane${i}"><div class="who"><em>${e}</em><div>${n}<small>${r}</small></div></div><div class="track"><div class="trail"></div><span class="runner">${e}</span><span class="flag">🏁</span></div><div class="res">·</div></div>`).join('')}
 let raceTimer;
 function race(a){
@@ -607,7 +661,7 @@ function race(a){
     const lane=$('#lane'+i);if(!lane)return;const run=lane.querySelector('.runner'),tr=lane.querySelector('.trail'),res=lane.querySelector('.res');
     lane.classList.remove('cracked','safe');
     if(!a){run.style.insetInlineStart='4px';tr.style.width='0';res.textContent='·';return}
-    const sec=10**a.lg/2/r;const p=sec<=WINDOW?1:Math.max(.04,Math.log10(WINDOW+1)/Math.log10(sec+1));
+    const sec=10**a.lg/2/(i?r*speedup:r);const p=sec<=WINDOW?1:Math.max(.04,Math.log10(WINDOW+1)/Math.log10(sec+1));
     const pos=`calc(${p} * (100% - 52px) + 4px)`;run.style.insetInlineStart=pos;tr.style.width=`calc(${p} * (100% - 52px) + 26px)`;
     run.classList.add('go');lane.classList.add(sec<=WINDOW?'cracked':'safe');
     res.textContent=(sec<=WINDOW?t('cracked'):t('safe'))+fmtTime(sec);
@@ -676,7 +730,7 @@ function genRender(anim){
   if(anim&&!RM){$$('.strip').forEach((s,i)=>{const n=s.children.length-1;s.style.transform='translateY(0)';requestAnimationFrame(()=>requestAnimationFrame(()=>{s.style.transition=`transform ${.9+i*.22}s cubic-bezier(.2,.85,.25,1.08)`;s.style.transform=`translateY(-${n*52}px)`}))})}
   else $$('.strip').forEach(s=>s.style.transform=`translateY(-${(s.children.length-1)*52}px)`);
 }
-function spin(){gen=makeGen();genRender(true)}
+function spin(){gen=makeGen();genRender(true);HIST.unshift(gen.str);HIST.length=Math.min(HIST.length,6);histPaint()}
 $('#spin').onclick=spin;
 ['oWords','oLen'].forEach(id=>$('#'+id).addEventListener('input',e=>{$('#'+id+'V').textContent=e.target.value;spin()}));
 ['oSep','oCap','oNum','oSym'].forEach(id=>$('#'+id).addEventListener('change',spin));
@@ -685,6 +739,57 @@ $('#tPhrase').onclick=()=>setMode('phrase');$('#tRandom').onclick=()=>setMode('r
 function toast(s){const e=$('#toast');e.textContent=s;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1800)}
 $('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(gen.str);toast(t('copied'))}catch(e){}};
 $('#toLab').onclick=()=>{pw.value=gen.str;update();$('#lab').scrollIntoView();setTimeout(()=>pw.focus({preventScroll:true}),500)};
+
+/* ---------- upgrades ---------- */
+// caps lock + shortcuts
+const capsChk=e=>{if(e.getModifierState)$('#caps').classList.toggle('show',e.getModifierState('CapsLock'))};
+pw.addEventListener('keydown',capsChk);pw.addEventListener('keyup',capsChk);$('#pw2').addEventListener('keyup',capsChk);
+addEventListener('keydown',e=>{const tag=(e.target.tagName||'');if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(tag)){e.preventDefault();$('#lab').scrollIntoView();pw.focus({preventScroll:true})}else if(e.key==='Escape'&&(e.target===pw||e.target===$('#pw2'))){$('#clear').click()}});
+// auto clear
+let wipeOn=false,wipeAt=0,wipeTick;
+function wipePaint(){$('#wipe').setAttribute('aria-pressed',wipeOn);$('#wipeTxt').textContent=wipeOn&&pw.value?t('wipeOn')(Math.max(0,Math.ceil((wipeAt-Date.now())/1000))):wipeOn?t('wipeOn')(60):t('wipeOff')}
+function wipeArm(){wipeAt=Date.now()+60000;wipePaint()}
+$('#wipe').onclick=()=>{wipeOn=!wipeOn;wipeArm();clearInterval(wipeTick);if(wipeOn)wipeTick=setInterval(()=>{if(pw.value&&Date.now()>=wipeAt){pw.value='';$('#pw2').value='';update();toast(t('wiped'))}wipePaint()},1000);wipePaint()};
+// confirm field
+function matchPaint(){const m=$('#match'),v2=$('#pw2').value;if(!v2||!pw.value){m.textContent='';m.className='match';return}const ok=v2===pw.value;m.textContent=ok?t('matchOk'):t('matchNo');m.className='match '+(ok?'ok':'no')}
+$('#pw2').addEventListener('input',()=>{matchPaint();wipeArm()});
+// boost
+$('#boost').onclick=()=>{if(!curA)return;if(curA.score>=4){toast(t('already'));return}
+  const add=Array.from({length:3},()=>{const w=WORDS[rnd(WORDS.length)];return w[0].toUpperCase()+w.slice(1)}).join('-')+(10+rnd(90));
+  pw.value=pw.value+'-'+add;$('#pw2').value='';update();toast(t('boosted'));pw.focus()};
+// arena speed toggle
+function setSpeed(f){speedup=f;$('#now').setAttribute('aria-pressed',f===1);$('#future').setAttribute('aria-pressed',f!==1);race(curA)}
+$('#now').onclick=()=>setSpeed(1);$('#future').onclick=()=>setSpeed(32);
+// report card
+$('#card').onclick=()=>{if(!curA)return;const a=curA,W=1200,H=630,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),he=lang==='he';
+  const bg=g.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#FFF3EF');bg.addColorStop(.5,'#F3F0FF');bg.addColorStop(1,'#ECF9F3');g.fillStyle=bg;g.fillRect(0,0,W,H);
+  [['#FFC9BA',120,560,220],['#CFC6FF',1080,90,240],['#BDEBD7',980,600,200]].forEach(([col,x,y,r])=>{g.globalAlpha=.45;g.fillStyle=col;g.beginPath();g.arc(x,y,r,0,7);g.fill()});g.globalAlpha=1;
+  const F='Fredoka, Rubik, sans-serif',FB='Rubik, sans-serif';g.direction=he?'rtl':'ltr';g.textAlign=he?'right':'left';const X=he?W-70:70;
+  const tg=g.createLinearGradient(70,0,420,0);tg.addColorStop(0,'#E36E57');tg.addColorStop(1,'#6F60F0');g.fillStyle=tg;g.font='700 54px '+F;g.fillText('LeakLens',X,105);
+  g.fillStyle='#6B5D7A';g.font='600 26px '+FB;g.fillText(t('cardTitle'),X,148);
+  const cx=he?W-190:190,cy=330;g.lineWidth=26;g.strokeStyle='#E8E4FF';g.beginPath();g.arc(cx,cy,105,0,7);g.stroke();
+  g.strokeStyle=VCOL[a.score];g.lineCap='round';g.beginPath();g.arc(cx,cy,105,-Math.PI/2,-Math.PI/2+Math.PI*2*(a.score+1)/5);g.stroke();
+  g.textAlign='center';g.fillStyle='#2C2668';g.font='700 76px '+F;g.fillText(a.score,cx,cy+18);g.font='600 22px '+FB;g.fillStyle='#6B5D7A';g.fillText('/ 4',cx,cy+52);
+  g.textAlign=he?'right':'left';const X2=he?W-360:360;g.fillStyle=VCOL[a.score];g.font='700 52px '+F;g.fillText(t('v')[a.score],X2,250);
+  g.fillStyle='#2C2668';g.font='600 26px '+FB;g.fillText(`${Math.round(a.bits)} ${t('bits')} · ${a.L} ${he?'תווים':'chars'} · ${fmtGuess(a.lg)} ${he?'ניחושים':'guesses'}`,X2,298);
+  const pats=[...a.types].filter(x=>x!=='random').map(x=>t('pat')[x]);g.fillStyle='#6B5D7A';g.font='500 22px '+FB;g.fillText(`${t('cardPat')}: ${pats.length?pats.join(', '):t('none')}`,X2,338);
+  t('lanes').forEach(([e,n],i)=>{const sec=10**a.lg/2/(i?RATES[i]*speedup:RATES[i]),y=395+i*46,ok=sec>WINDOW;g.fillStyle=ok?'rgba(217,243,231,.9)':'rgba(255,230,222,.95)';const bx=he?W-360-720:360;g.beginPath();g.roundRect(bx,y-30,720,38,12);g.fill();
+    g.fillStyle='#2C2668';g.font='600 21px '+FB;g.fillText(`${e}  ${n}`,he?W-380:380,y-4);g.textAlign=he?'left':'right';g.fillStyle=ok?'#2E9C74':'#E36E57';g.fillText((ok?'🛡️ ':'🔓 ')+fmtTime(sec),he?W-360-700:1060,y-4);g.textAlign=he?'right':'left'});
+  g.textAlign='center';g.fillStyle='#6B5D7A';g.font='500 20px '+FB;g.fillText(t('cardFoot'),W/2,H-28);
+  c.toBlob(b=>{const u=URL.createObjectURL(b),l=document.createElement('a');l.href=u;l.download='leaklens-report.png';document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);toast(t('cardSaved'))})};
+// generator history
+const HIST=[];function histPaint(){const h=$('#hist');h.innerHTML=HIST.length?`<small>${t('hist')}</small>`+HIST.map((x,i)=>`<button type="button" data-k="${i}" title="${esc(x)}">${esc(x)}</button>`).join(''):''}
+$('#hist').addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;try{await navigator.clipboard.writeText(HIST[+b.dataset.k]);toast(t('copied'))}catch(err){}});
+// confetti
+function confetti(){if(RM)return;const box=document.createElement('div');box.className='confetti';const cols=['#FFB4A2','#CFC8FF','#B7E8D2','#FFE19A','#F9BCD0','#6F60F0','#E36E57'];
+  for(let i=0;i<46;i++){const p=document.createElement('i');p.style.left=Math.random()*100+'%';p.style.background=cols[i%cols.length];p.style.setProperty('--dx',(Math.random()*200-100)+'px');p.style.setProperty('--r',(Math.random()*720-360)+'deg');p.style.animationDelay=Math.random()*.3+'s';box.appendChild(p)}
+  document.body.appendChild(box);setTimeout(()=>box.remove(),2300)}
+// scroll progress + back to top
+addEventListener('scroll',()=>{const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);$('#progress').style.width=(p*100)+'%';$('#totop').classList.toggle('show',h.scrollTop>700)},{passive:true});
+$('#totop').onclick=()=>scrollTo({top:0,behavior:RM?'auto':'smooth'});
+// active nav link
+const navIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('.navlinks a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+['lab','arena','generate','how','faq'].forEach(id=>navIO.observe($('#'+id)));
 
 /* ---------- hero lens ---------- */
 let lens=null;
@@ -717,7 +822,7 @@ let lens=null;
     if(!RM&&vis)raf=requestAnimationFrame(frame);
   }
   const mv=e=>{const r=cv.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;last=performance.now()};
-  cv.addEventListener('pointermove',mv);cv.addEventListener('pointerdown',mv);
+  cv.addEventListener('pointermove',mv);cv.addEventListener('pointerdown',e=>{mv(e);build()});
   new IntersectionObserver(([e])=>{vis=e.isIntersecting;cancelAnimationFrame(raf);if(vis)raf=requestAnimationFrame(frame)}).observe(cv);
   let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{build();if(RM)frame(0)},150)});
   lens={rebuild(){build();if(RM||!vis)frame(performance.now())}};
