@@ -42,7 +42,7 @@ window.NOYA_FAQ = {
    "t": "safe",
    "he": [
     "איך בדיקת הדליפות לא חושפת את הסיסמה?",
-    "הסיסמה מוצפנת ב-SHA-1 ורק 5 התווים הראשונים נשלחים לשירות Have I Been Pwned. הוא מחזיר מאות התאמות, והדפדפן בודק מקומית אם שלכם ביניהן (k-anonymity)."
+    "מחושב לסיסמה hash מסוג SHA-1, ורק 5 התווים הראשונים נשלחים לשירות Have I Been Pwned. הוא מחזיר מאות התאמות, והדפדפן בודק מקומית אם שלכם ביניהן (k-anonymity)."
    ],
    "en": [
     "How does the leak check avoid exposing my password?",
