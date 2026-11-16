@@ -17,7 +17,7 @@
   <a href="https://github.com/NoyaAdivi/LeakLens"><img src="https://img.shields.io/github/languages/top/NoyaAdivi/LeakLens?color=D9F3E7&labelColor=1F7350" alt="Top language"></a>
 </p>
 
-<h3 align="center">Check a password without ever giving it away.</h3>
+<h3 align="center">See your password the way a hacker does.</h3>
 
 <p align="center">
   LeakLens is an interactive security lab and a REST API: it X-rays password patterns, races them against real attackers, checks data breaches and generates secure passwords.<br>
@@ -152,7 +152,7 @@ curl -X POST http://localhost:8000/v1/check \
 <p align="center"><a href="https://noyaadivi.github.io/LeakLens/"><img src="docs/readme/playground-en.svg" width="100%" alt="Try it in your browser"></a></p>
 
 <p align="center">
-  <a href="https://noyaadivi.github.io/LeakLens/"><img src="docs/images/demo-en.gif" width="85%" alt="Typing a password in the LeakLens lab: the strength ring, X-ray and fingerprint flower update live"></a>
+  <a href="https://noyaadivi.github.io/LeakLens/"><img src="docs/images/demo-en.gif" width="90%" alt="Typing a password in the LeakLens lab: the strength ring, X-ray and fingerprint flower update live"></a>
 </p>
 
 <table>
@@ -161,15 +161,15 @@ curl -X POST http://localhost:8000/v1/check \
     <td width="50%"><p><b>🩻 Pattern X-ray</b></p>Your password split into colored blocks exactly like a cracking tool sees it: leaked classics, dictionary words, years, keyboard walks, sequences and repeats.</td>
   </tr>
   <tr valign="top">
-    <td width="50%"><p><b>🏁 Attack race</b></p>Four attackers (website login, laptop, GPU rig, botnet) race to crack it within a year. Switch to <b>In 10 years</b> to see how faster hardware changes the result.</td>
+    <td width="50%"><p><b>🏁 Attack race</b></p>Who cracks it within a year? Four attackers (website login, hacker laptop, GPU rig, botnet) start running the moment you type. Switch to <b>In 10 years (32x faster)</b> to see how hardware changes the result.</td>
     <td width="50%"><p><b>🌸 Fingerprint flower</b></p>A unique flower and 3 words grown from the SHA-256 hash. Same password, same flower, so you can spot a typo while the field stays hidden. A confirm field checks the match.</td>
   </tr>
   <tr valign="top">
     <td width="50%"><p><b>✨ Make it stronger + 📸 report card</b></p>One click upgrades a weak password with random words. Save a shareable PNG report card that never contains the password.</td>
-    <td width="50%"><p><b>🎰 Password slot machine</b></p>Spinning reels pick random words with <code>crypto.getRandomValues</code>, or switch to random characters. Copy, send to the lab, or reuse from the recent list.</td>
+    <td width="50%"><p><b>🎰 Password slot machine</b></p>Spinning reels pick a passphrase with <code>crypto.getRandomValues</code>: choose the words, separator, capitals and a number, or switch to random characters with length and symbols. Copy, test it in the lab, or reuse from the recent list.</td>
   </tr>
   <tr valign="top">
-    <td width="50%"><p><b>🕵️ Animated leak check</b></p>Watch the 5-character prefix travel to HIBP and the padded list come back, then the match happens on your device.</td>
+    <td width="50%"><p><b>🕵️ Animated leak check</b></p>Press <b>Check leaks privately</b> and watch the 5-character SHA-1 prefix travel to HIBP and hundreds of padded matches come back, then your browser finds yours locally.</td>
     <td width="50%"><p><b>🛡️ Privacy extras</b></p>Auto-clear after 60 seconds, Caps Lock warning, <kbd>/</kbd> and <kbd>Esc</kbd> shortcuts, dark mode, Hebrew and English, and a draggable accessibility menu.</td>
   </tr>
 </table>
