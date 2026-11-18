@@ -22,7 +22,7 @@ For even more privacy, `POST /v1/pwned/hash` accepts a SHA-1 hash made on the cl
 
 ## Protecting the API itself
 
-| Threat | Defence | Code |
+| Threat | Defense | Code |
 |---|---|---|
 | Brute force, scraping | Sliding window rate limit per IP, `429` + `Retry-After` | `app/security.py` |
 | Memory abuse | Body size cap (4 KB), password length cap (256) | `app/security.py`, `app/main.py` |

@@ -22,14 +22,14 @@
 <h3 align="center">תראו את הסיסמה שלכם בעיניים של האקר.</h3>
 
 <p align="center">
-  LeakLens הוא מעבדת אבטחה אינטראקטיבית וגם REST API: הוא מצלם רנטגן לדפוסים בסיסמה, מריץ אותה במרוץ מול תוקפים אמיתיים, בודק דליפות מידע ויוצר סיסמאות מאובטחות.<br>
+  LeakLens משלב מעבדת אבטחה אינטראקטיבית ו־REST API: הוא עושה רנטגן לדפוסים בסיסמה, מריץ אותה במרוץ מול תוקפים אמיתיים, בודק דליפות מידע ויוצר סיסמאות מאובטחות.<br>
   הסיסמה לא נשמרת, לא נרשמת ביומן ולא נשלחת לשום מקום. רק 5 תווים מה־hash שלה יוצאים מהשרת.
 </p>
 
 <table align="center">
   <tr>
     <td align="center" width="25%"><a href="#-how-your-password-stays-private"><b>🔐 5 תווים</b></a><br><sub>זה כל מה שיוצא</sub></td>
-    <td align="center" width="25%"><a href="#-api-at-a-glance"><b>⚡ 7</b></a><br><sub>נקודות REST</sub></td>
+    <td align="center" width="25%"><a href="#-api-at-a-glance"><b>⚡ 7</b></a><br><sub>נקודות קצה REST</sub></td>
     <td align="center" width="25%"><a href="https://noyaadivi.github.io/LeakLens/?lang=he"><b>🌍 HE · EN</b></a><br><sub>כל הודעה בשתי השפות</sub></td>
     <td align="center" width="25%"><a href="#-try-it-in-your-browser"><b>🏁 4</b></a><br><sub>תוקפים במרוץ החי</sub></td>
   </tr>
@@ -53,7 +53,7 @@
       <ul>
         <li>חיפוש ב־<a href="https://haveibeenpwned.com/Passwords"><b>Have I Been Pwned</b></a>, מאגר של מאות מיליוני סיסמאות שדלפו</li>
         <li><b>k-anonymity:</b> נשלחים רק 5 התווים הראשונים של hash מסוג SHA-1</li>
-        <li><b>נקודה שמקבלת רק hash</b>, ללקוחות שלא רוצים לשלוח את הסיסמה בכלל</li>
+        <li><b>נקודת קצה שמקבלת רק hash</b>, ללקוחות שלא רוצים לשלוח את הסיסמה בכלל</li>
       </ul>
     </td>
   </tr>
@@ -111,7 +111,7 @@
 <a name="-api-at-a-glance"></a>
 <p align="center"><a href="#-try-it-in-your-browser"><img src="docs/readme/api-he.svg" width="100%" alt="ה־API במבט אחד"></a></p>
 
-| שיטה | נקודה | מה היא עושה |
+| שיטה | נקודת קצה | מה היא עושה |
 |---|---|---|
 | `POST` | `/v1/strength` | ציון, אנטרופיה, זמן פיצוח, בדיקות וטיפים |
 | `POST` | `/v1/pwned` | בדיקת דליפות לסיסמה, בשיטת k-anonymity |
@@ -164,7 +164,7 @@ curl -X POST http://localhost:8000/v1/check \
   </tr>
   <tr valign="top">
     <td width="50%"><p><b>🏁 מרוץ פריצה</b></p>מי יפרוץ אותה תוך שנה? ארבעה תוקפים (התחברות לאתר, לפטופ של האקר, חוות GPU, בוטנט) מתחילים לרוץ ברגע שמקלידים. מעבר ל<b>בעוד 10 שנים (פי 32 מהר יותר)</b> מראה איך החומרה משנה את התוצאה.</td>
-    <td width="50%"><p><b>🌸 פרח טביעת אצבע</b></p>פרח ייחודי ו-3 מילים שצומחים מה-hash מסוג SHA-256. אותה סיסמה, אותו פרח, כך אפשר לזהות טעות הקלדה כשהשדה מוסתר. שדה אימות בודק התאמה.</td>
+    <td width="50%"><p><b>🌸 פרח טביעת אצבע</b></p>פרח ייחודי ו-3 מילים שצומחים מה-hash מסוג SHA-256. אותה סיסמה, אותו פרח, כך שאפשר לזהות טעות הקלדה כשהשדה מוסתר. שדה אימות בודק התאמה.</td>
   </tr>
   <tr valign="top">
     <td width="50%"><p><b>✨ חיזוק בלחיצה + 📸 כרטיס דוח</b></p>לחיצה אחת משדרגת סיסמה חלשה עם מילים אקראיות. אפשר לשמור כרטיס דוח PNG לשיתוף, שאף פעם לא מכיל את הסיסמה.</td>
@@ -199,7 +199,7 @@ curl -X POST http://localhost:8000/v1/check \
 | בקשות גדולות מדי | גוף מעל 4KB נדחה עם `413`, וסיסמה מוגבלת ל־256 תווים |
 | התקפות דפדפן | `nosniff`, חסימת הטמעה במסגרת, CSP קפדני, `no-referrer`, HSTS |
 | קריאות מאתרים אחרים | CORS סגור כברירת מחדל, ונפתח רק לאתרים שמגדירים |
-| קונטיינר | תמונה רזה שרצה כמשתמש בלי הרשאות root |
+| קונטיינר | אימג׳ רזה שרץ כמשתמש בלי הרשאות root |
 
 עוד פרטים ב־[docs/SECURITY.he.md](docs/SECURITY.he.md).
 
@@ -236,7 +236,7 @@ curl -X POST http://localhost:8000/v1/check \
    pip install -r requirements-dev.txt
    uvicorn app.main:app --reload
    ```
-2. פותחים את [http://localhost:8000/docs](http://localhost:8000/docs) ומנסים כל נקודה.
+2. פותחים את [http://localhost:8000/docs](http://localhost:8000/docs) ומנסים כל נקודת קצה.
 3. מריצים את הבדיקות:
    ```bash
    pytest -q

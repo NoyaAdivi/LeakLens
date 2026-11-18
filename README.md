@@ -77,7 +77,7 @@
 
 <a name="app"></a>
 <h3 align="center">📲 App and FAQ <sub><sup>new</sup></sub></h3>
-<p align="center">LeakLens installs as a real app with its own icon, and the site answers common questions by topic.</p>
+<p align="center">LeakLens can be installed as a real app with its own icon, and the site answers common questions by topic.</p>
 
 <table>
   <tr valign="top">
