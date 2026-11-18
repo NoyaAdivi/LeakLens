@@ -274,6 +274,51 @@ html[data-theme="dark"] .match.ok{color:#9BE3C6}
 @keyframes fall{to{transform:translate(var(--dx),105vh) rotate(var(--r));opacity:.2}}
 .built-by{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45em;margin:.6em 0;font-weight:600}.built-by a{display:inline-flex;align-items:center;gap:.4em;padding:.28em .8em;border-radius:999px;font-weight:800;text-decoration:none;color:inherit;background:rgba(10,102,194,.1);transition:transform .25s ease,background .25s ease,box-shadow .25s ease}.built-by a:hover,.built-by a:focus-visible{transform:translateY(-2px);background:rgba(10,102,194,.18);box-shadow:0 6px 16px rgba(10,102,194,.18)}.built-by svg{width:1.1em;height:1.1em;fill:#0A66C2;flex:none;transition:transform .35s ease}.built-by a:hover svg{transform:rotate(-8deg) scale(1.12)}html[lang="he"] .built-by .bb-en,html:not([lang="he"]) .built-by .bb-he{display:none}
 
+/* ===== clearer lab layout ===== */
+.steps{list-style:none;padding:0;margin:0 auto 22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:900px}
+.steps li{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px 7px 7px;font-weight:600;font-size:.95rem}
+html[dir=rtl] .steps li{padding:7px 7px 7px 16px}
+.steps li b{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:Fredoka,sans-serif;background:linear-gradient(135deg,var(--coral),var(--purple));flex:none}
+.toolsrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.toolsrow .local{margin-inline-start:0}
+.results{margin-top:22px;padding:0;overflow:hidden}
+.rtabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px;background:var(--lav);border-bottom:1px solid var(--line)}
+.rtabs button{border:0;background:transparent;color:var(--deep);font-family:Fredoka,Rubik,sans-serif;font-weight:600;font-size:1rem;padding:12px 8px;border-radius:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .25s,transform .2s,box-shadow .25s}
+.rtabs button em{font-style:normal;font-size:1.25rem;transition:transform .3s}
+.rtabs button:hover em{transform:scale(1.2) rotate(-8deg)}
+.rtabs button[aria-selected="true"]{background:var(--surface);box-shadow:0 6px 16px rgba(85,72,200,.16)}
+.badge{font-style:normal;font-size:.75rem;font-weight:700;border-radius:999px;padding:2px 8px;background:var(--surface2);color:var(--deep);direction:ltr}
+.badge:empty{display:none}
+@media(max-width:640px){.rtabs{grid-template-columns:1fr 1fr}.rtabs button{font-size:.9rem;padding:10px 6px}}
+.panel{padding:24px;animation:pop .4s both}
+.panel[hidden]{display:none}
+.what{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin:0 0 20px;color:var(--muted);font-size:.97rem}
+.what b{flex:none}
+.results.locked .panel{display:none}
+.results.locked .rtabs button{opacity:.5;pointer-events:none}
+.gate{display:none;text-align:center;padding:44px 24px 48px}
+.results.locked .gate{display:block}
+.gate-ic{font-size:3rem;width:88px;height:88px;margin:0 auto 12px;display:grid;place-items:center;border-radius:28px;background:linear-gradient(135deg,var(--peach),var(--lav),var(--mint));animation:float 4s ease-in-out infinite}
+.gate h3{justify-content:center;font-size:1.4rem!important}
+.gate p{color:var(--muted);max-width:460px;margin:6px auto 18px}
+.sigilbox{text-align:start;align-items:stretch}
+.sigrow{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+.sigcol{display:flex;flex-direction:column;align-items:center}
+.sigrow .confirm{margin:0}
+.cstep{font-family:Fredoka,Rubik,sans-serif;font-size:1.05rem}
+@media(max-width:700px){.sigrow{grid-template-columns:1fr}}
+.why{margin-top:18px;background:var(--surface2)}
+.why summary{font-size:1rem;justify-content:flex-start}
+.why summary::after{margin-inline-start:auto}
+.howread{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
+.howread>span{background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:600}
+.howread .r{background:var(--peach)}.howread .g{background:var(--mint)}
+.arenacard{text-align:center}
+.arwrap{position:relative}
+.argate{position:absolute;inset:-6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--glass);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-radius:18px;font-weight:600;transition:opacity .4s}
+.argate p{margin:0;max-width:420px}
+.argate[hidden]{display:flex;opacity:0;pointer-events:none}
+
 /* ===== Mobile stability: no sideways drift, pinch-zoom stays allowed ===== */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none}
@@ -329,6 +374,12 @@ html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x
   <div class="wrap">
     <div class="sh rv"><span class="eyebrow" data-i="labEy">The lab</span><h2 data-i="labT">Put your password under the lens</h2><p data-i="labP">Type and watch. Every result is computed right here on your device.</p></div>
 
+    <ol class="steps rv">
+      <li><b>1</b><span data-i="st1">Type a password or tap an example</span></li>
+      <li><b>2</b><span data-i="st2">Explore the 4 checks in the tabs</span></li>
+      <li><b>3</b><span data-i="st3">Make it stronger or spin a new one</span></li>
+    </ol>
+
     <div class="card inputcard rv">
       <label class="sr" for="pw" data-i="pwLbl">Password</label>
       <div class="field">
@@ -339,25 +390,37 @@ html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x
         </div>
       </div>
       <div class="meterbar"><i id="bar"></i></div>
+      <div class="caps" id="caps" data-i="caps">⇪ Caps Lock is on</div>
       <div class="chips">
         <small data-i="try">Try:</small>
-        <button class="chip" type="button">password123</button>
-        <button class="chip" type="button">Tr0ub4dor&amp;3</button>
-        <button class="chip" type="button">qwerty2024!</button>
-        <button class="chip" type="button">correct horse battery staple</button>
-        <span class="local">🔒 <span data-i="local">Never leaves this page</span></span>
+        <button class="chip ex" type="button">password123</button>
+        <button class="chip ex" type="button">Tr0ub4dor&amp;3</button>
+        <button class="chip ex" type="button">qwerty2024!</button>
+        <button class="chip ex" type="button">correct horse battery staple</button>
       </div>
-      <div class="caps" id="caps" data-i="caps">⇪ Caps Lock is on</div>
-      <div class="chips" style="margin-top:12px">
+      <div class="toolsrow">
+        <span class="local">🔒 <span data-i="local">Never leaves this page</span></span>
         <button class="chip wipe" id="wipe" type="button" aria-pressed="false">⏱️ <span id="wipeTxt">Auto-clear: off</span></button>
-        <span class="kbd" data-ih="kbd">Press <kbd>/</kbd> to type · <kbd>Esc</kbd> to clear</span>
       </div>
     </div>
 
-    <div class="grid3">
-      <div class="card rv">
-        <h3>📊 <span data-i="scoreT">Strength report</span></h3>
-        <p class="sub" data-i="scoreS">Based on how real cracking tools guess, not on silly rules.</p>
+    <div class="card results locked rv" id="results">
+      <div class="rtabs" role="tablist">
+        <button role="tab" type="button" aria-selected="true" data-tab="score"><em>📊</em><span data-i="tbScore">Strength</span><i class="badge" id="bScore"></i></button>
+        <button role="tab" type="button" aria-selected="false" data-tab="xray"><em>🩻</em><span data-i="tbXray">X-ray</span><i class="badge" id="bPat"></i></button>
+        <button role="tab" type="button" aria-selected="false" data-tab="sig"><em>🌸</em><span data-i="tbSig">Fingerprint</span></button>
+        <button role="tab" type="button" aria-selected="false" data-tab="leak"><em>🕵️</em><span data-i="tbLeak">Leak check</span></button>
+      </div>
+
+      <div class="gate" id="gate">
+        <div class="gate-ic">🔐</div>
+        <h3 data-i="gateT">Your results will open here</h3>
+        <p data-i="gateP">Type a password in the box above. Then switch between the tabs to see 4 different checks.</p>
+        <button class="btn sm" id="gateTry" type="button" data-i="gateBtn">✨ Show me with an example</button>
+      </div>
+
+      <div class="panel" data-panel="score">
+        <p class="what"><b>❓</b><span data-i="scoreS">How long a real cracking tool needs to guess it, scored from 0 to 4.</span></p>
         <div class="scorebox">
           <div class="ring"><svg viewBox="0 0 130 130"><circle class="bg" cx="65" cy="65" r="55"/><circle class="fg" id="ringfg" cx="65" cy="65" r="55"/></svg><div class="num"><div><b id="scoreNum">0</b><small>/ 4</small></div></div></div>
           <div style="flex:1;min-width:0">
@@ -376,45 +439,31 @@ html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x
           <button class="btn sm soft" id="card" type="button" disabled data-i="cardBtn">📸 Save report card</button>
         </div>
       </div>
-      <div class="card sigilbox rv">
-        <h3>🌸 <span data-i="sigT">Password fingerprint</span></h3>
-        <p class="sub" data-i="sigS">A unique flower grown from your password's hash. Same password, same flower, so you can spot a typo without ever revealing it.</p>
-        <canvas id="sigil" width="440" height="440" aria-hidden="true"></canvas>
+
+      <div class="panel" data-panel="xray" hidden>
+        <p class="what"><b>❓</b><span data-i="xrS">x</span></p>
+        <div class="xray" id="xray"><span class="empty" data-i="xrE">Your password's skeleton will appear here.</span></div>
+        <div class="legend" id="legend"></div>
+        <details class="why"><summary>💡 <span data-i="whyT">Why patterns matter</span></summary><p class="sub" data-i="whyS">x</p><ul class="tips" id="whyList"></ul></details>
+      </div>
+
+      <div class="panel sigilbox" data-panel="sig" hidden>
+        <p class="what"><b>❓</b><span data-i="sigS">x</span></p>
+        <div class="sigrow">
+          <div class="sigcol"><canvas id="sigil" width="440" height="440" aria-hidden="true"></canvas>
         <div class="fpw" id="fpw">· · ·</div>
-        <div class="confirm">
+        </div>
+          <div class="confirm">
+            <b class="cstep" data-i="sigStep">Type it again to check for typos:</b>
           <label class="sr" for="pw2" data-i="pw2Lbl">Type it again</label>
           <input id="pw2" type="password" autocomplete="off" spellcheck="false" placeholder="Type it again to confirm..." data-ip="ph2">
           <div class="match" id="match" aria-live="polite"></div>
         </div>
+        </div>
       </div>
-    </div>
 
-    <div class="card rv" style="margin-top:22px">
-      <h3>🩻 <span data-i="xrT">Pattern X-ray</span></h3>
-      <p class="sub" data-i="xrS">How a cracking tool actually splits your password. Every colored block is a shortcut an attacker can take.</p>
-      <div class="xray" id="xray"><span class="empty" data-i="xrE">Your password's skeleton will appear here.</span></div>
-      <div class="legend" id="legend"></div>
-    </div>
-  </div>
-</section>
-
-<section id="arena">
-  <div class="wrap">
-    <div class="sh rv"><span class="eyebrow" data-i="arEy">Attack race</span><h2 data-i="arT">Who cracks it within a year?</h2><p data-i="arP">Four real-world attackers start running the moment you type. If they reach the flag, your password falls within a year.</p></div>
-    <div class="card rv" style="text-align:center">
-      <div class="seg-toggle"><button type="button" id="now" aria-pressed="true" data-i="now">Today</button><button type="button" id="future" aria-pressed="false" data-i="future">In 10 years (32x faster)</button></div>
-      <div class="lanes" id="lanes" style="text-align:start"></div>
-      <p class="arena-note" data-i="arNote">Estimates assume the attacker knows common patterns and has a stolen copy of the password hash (except the website attacker, who must guess online).</p>
-    </div>
-  </div>
-</section>
-
-<section id="leaks">
-  <div class="wrap">
-    <div class="grid2">
-      <div class="card rv">
-        <h3>🕵️ <span data-i="lkT">Private leak check</span></h3>
-        <p class="sub" data-i="lkS">We hash your password with SHA-1 and send only the first 5 characters. The breach service returns hundreds of matches and your browser finds yours locally.</p>
+      <div class="panel" data-panel="leak" hidden>
+        <p class="what"><b>❓</b><span data-i="lkS">x</span></p>
         <div class="flowviz" id="flowviz">
           <div class="node"><em>💻</em><span data-i="nYou">You</span></div>
           <div class="wire"><span class="pkt" id="pkt">#####</span></div>
@@ -424,11 +473,26 @@ html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x
         <div class="genfoot"><button class="btn" id="leakBtn" type="button" disabled data-i="lkBtn">🔎 Check leaks privately</button></div>
         <div class="leakres" id="leakres" aria-live="polite"></div>
       </div>
-      <div class="card rv">
-        <h3>💡 <span data-i="whyT">Why patterns matter</span></h3>
-        <p class="sub" data-i="whyS">Cracking tools never start with random guesses. They try what people actually do:</p>
-        <ul class="tips" id="whyList"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="arena">
+  <div class="wrap">
+    <div class="sh rv"><span class="eyebrow" data-i="arEy">Attack race</span><h2 data-i="arT">Who cracks it within a year?</h2><p data-i="arP">x</p></div>
+    <div class="card rv arenacard">
+      <div class="howread">
+        <span>🏃 <span data-i="ar1">x</span></span>
+        <span>🏁 <span data-i="ar2">x</span></span>
+        <span class="r">🔓 <span data-i="ar3">x</span></span>
+        <span class="g">🛡️ <span data-i="ar4">x</span></span>
       </div>
+      <div class="seg-toggle"><button type="button" id="now" aria-pressed="true" data-i="now">Today</button><button type="button" id="future" aria-pressed="false" data-i="future">In 10 years (32x faster)</button></div>
+      <div class="arwrap">
+        <div class="lanes" id="lanes" style="text-align:start"></div>
+        <div class="argate" id="arGate"><p>⬆️ <span data-i="arGate">x</span></p><a class="btn sm" href="#lab" data-i="arGateBtn">🔍 Go to the lab</a></div>
+      </div>
+      <p class="arena-note" data-i="arNote">Estimates</p>
     </div>
   </div>
 </section>
@@ -548,6 +612,28 @@ why:[['🔁','קודם סיסמאות מדליפות: מיליוני סיסמא�
 leakBad:n=>`😱 נמצאה ${n.toLocaleString('he')} פעמים בדליפות מידע. כדאי להחליף אותה בכל מקום.`,leakGood:'🎉 לא נמצאה באף דליפה ידועה. יפה!',leakErr:'😕 לא הצלחנו להגיע לשירות הדליפות. כדאי לבדוק את החיבור ולנסות שוב.',leakWait:'בודקים...',copied:'הועתק! 📋',instant:'מיידית',eternity:'לנצח ∞',
 units:{s:['שנייה','שניות'],m:['דקה','דקות'],h:['שעה','שעות'],d:['יום','ימים'],mo:['חודש','חודשים'],y:['שנה','שנים'],c:['מאה','מאות']},guessesK:['','K','M','B','T']
 }};
+Object.assign(T.en,{st1:'Type a password or tap an example',st2:'Explore the 4 checks in the tabs',st3:'Make it stronger or spin a new one',
+tbScore:'Strength',tbXray:'X-ray',tbSig:'Fingerprint',tbLeak:'Leak check',
+gateT:'Your results will open here',gateP:'Type a password in the box above. Then switch between the tabs to see 4 different checks.',gateBtn:'✨ Show me with an example',
+scoreS:'A score from 0 to 4, based on how many guesses a real cracking tool needs. The tips below tell you exactly what to fix.',
+xrS:'This is how a cracking tool splits your password. Every colored block is a shortcut for the attacker. Only the green "Random-ish" blocks really protect you.',
+sigS:'Every password grows its own flower and 3-word name. Same password, same flower. So you can check you typed it right without ever showing it.',
+sigStep:'Type it again to check for typos:',
+lkS:'Was this password exposed in a real data breach? Only the first 5 characters of its hash are sent, never the password itself.',
+arT:'How long until it gets cracked?',arP:'Four kinds of attackers try to guess your password. Each one runs toward the flag. Reaching it means cracked within a year.',
+ar1:'Each lane is a different attacker',ar2:'The flag = 1 year of guessing',ar3:'Reached the flag = cracked',ar4:'Stopped early = safe',
+arGate:'Type a password in the lab first, then the race starts on its own.',arGateBtn:'🔍 Go to the lab'});
+Object.assign(T.he,{st1:'מקלידים סיסמה או בוחרים דוגמה',st2:'עוברים בין 4 הבדיקות בלשוניות',st3:'מחזקים אותה או מגרילים חדשה',
+tbScore:'חוזק',tbXray:'רנטגן',tbSig:'טביעת אצבע',tbLeak:'בדיקת דליפות',
+gateT:'התוצאות ייפתחו כאן',gateP:'מקלידים סיסמה בתיבה למעלה, ואז עוברים בין הלשוניות כדי לראות 4 בדיקות שונות.',gateBtn:'✨ תראו לי עם דוגמה',
+scoreS:'ציון מ-0 עד 4, לפי כמה ניחושים כלי פריצה אמיתי צריך. הטיפים למטה אומרים בדיוק מה לתקן.',
+xrS:'כך כלי פריצה מפרק את הסיסמה לחלקים. כל בלוק צבעוני הוא קיצור דרך לתוקף. רק הבלוקים הירוקים ("אקראי") באמת מגינים עליכם.',
+sigS:'כל סיסמה מצמיחה פרח ושם של 3 מילים משלה. אותה סיסמה, אותו פרח. ככה אפשר לוודא שהקלדתם נכון בלי לחשוף את הסיסמה.',
+sigStep:'הקלידו אותה שוב כדי לבדוק שאין טעות:',
+lkS:'האם הסיסמה הזו נחשפה בדליפת מידע אמיתית? נשלחים רק 5 התווים הראשונים של ה-hash שלה, אף פעם לא הסיסמה עצמה.',
+arT:'כמה זמן עד שיפרצו אותה?',arP:'ארבעה סוגי תוקפים מנסים לנחש את הסיסמה. כל אחד רץ לעבר הדגל. מי שמגיע אליו פורץ אותה תוך פחות משנה.',
+ar1:'כל מסלול הוא תוקף אחר',ar2:'הדגל = שנה של ניחושים',ar3:'הגיע לדגל = נפרצה',ar4:'נעצר באמצע = מוגנת',
+arGate:'קודם מקלידים סיסמה במעבדה, ואז המרוץ מתחיל לבד.',arGateBtn:'🔍 למעבדה'});
 let lang='en';
 try{const q=new URLSearchParams(location.search).get('lang');lang=q||localStorage.getItem('leaklens-lang')||(navigator.language||'').slice(0,2)}catch(e){}
 if(lang!=='he')lang='en';
@@ -640,7 +726,7 @@ const pw=$('#pw'),VCOL=['#E36E57','#F29A6B','#E8B847','#4FBF95','#6F60F0'];
 let peek=false,lastPw=null,curA=null,prevScore=-1;
 $('#peek').onclick=()=>{peek=!peek;pw.type=$('#pw2').type=peek?'text':'password';$('#peek').setAttribute('aria-pressed',peek);$('#peek').textContent=peek?'🙈':'👁️';update(true)};
 $('#clear').onclick=()=>{pw.value='';$('#pw2').value='';update();pw.focus()};
-$$('.chip').forEach(c=>c.onclick=()=>{pw.value=c.textContent;update();pw.focus()});
+$$('.chip.ex').forEach(c=>c.onclick=()=>{pw.value=c.textContent;update();pw.focus()});
 pw.addEventListener('input',()=>{update();wipeArm()});
 
 function update(force){
@@ -661,11 +747,19 @@ function update(force){
   if(!a)xr.innerHTML=`<span class="empty">${t('xrE')}</span>`;
   else xr.innerHTML=a.segs.map(sg=>`<div class="seg" style="--seg:var(${COLORS[sg.t]})"><div class="tiles">${sg.tok.map(c=>`<b>${peek?esc(c===' '?'␣':c):'•'}</b>`).join('')}</div><small>${t('pat')[sg.t]}</small></div>`).join('');
   race(a);matchPaint();
+  $('#results').classList.toggle('locked',!a);$('#arGate').hidden=!!a;
+  $('#bScore').textContent=a?a.score+'/4':'';$('#bScore').style.color=a?VCOL[a.score]:'';$('#bPat').textContent=a?String(a.pats):'';
   $('#boost').disabled=$('#card').disabled=!a;
   if(a&&a.score===4&&prevScore<4&&changed)confetti();prevScore=a?a.score:-1;
   if(changed){sigil.set(v);leakPrep(v)}
 }
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- result tabs ---------- */
+function showTab(k){$$('.rtabs [role=tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===k));$$('.panel').forEach(p=>p.hidden=p.dataset.panel!==k)}
+$$('.rtabs [role=tab]').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+$('.rtabs').addEventListener('keydown',e=>{if(!/Arrow(Left|Right)/.test(e.key))return;const B=$$('.rtabs [role=tab]'),i=B.findIndex(b=>b.getAttribute('aria-selected')==='true');const d=(e.key==='ArrowRight')===(root.dir==='rtl')?-1:1;const n=B[(i+d+B.length)%B.length];showTab(n.dataset.tab);n.focus()});
+$('#gateTry').onclick=()=>{pw.value='Summer2024!';update();showTab('xray');pw.focus({preventScroll:true})};
 
 /* ---------- attack race ---------- */
 const RATES=[10,1e9,1e11,1e13],WINDOW=31557600;let speedup=1;
