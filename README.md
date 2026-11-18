@@ -2,7 +2,7 @@
   <a href="https://noyaadivi.github.io/LeakLens/"><img src="docs/readme/banner-en.svg" width="100%" alt="LeakLens: a privacy-first REST API for password strength and data breach checks"></a>
 </p>
 
-<p align="center"><a href="README.he.md"><img src="docs/readme/lang-he.svg" height="44" alt="לגרסה בעברית"></a></p>
+<p align="center"><a href="README.he.md"><img src="docs/readme/lang-he.svg" height="44" alt="לגרסה בשפה העברית"></a></p>
 
 <p align="center">
   <a href="https://noyaadivi.github.io/LeakLens/"><img src="https://img.shields.io/badge/Live_playground-FFD5C9?style=for-the-badge&logo=googlechrome&logoColor=A8483A" alt="Live playground"></a>
